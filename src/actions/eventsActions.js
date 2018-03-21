@@ -5,11 +5,14 @@ export function fetchEvents() {
   return function(dispatch) {
     dispatch({type: "FETCH_EVENTS"});
     
-    // xxxxxxxxxxxxxx continue: format dates for route and pass route to axios
-    // const today = new Date;
-    // const route = Constants.EVENTS_API_BASE + today
+    // getting date strings for API endpoint
+    let today = new Date;
+    let firstday = today.toISOString().slice(0, 10);
+    today.setDate(today.getDate() + Constants.DAY_OFFSET);
+    let lastday = today.toISOString().slice(0, 10);
+    let route = Constants.EVENTS_API_BASE + firstday + '/' + lastday + '/';
 
-    axios.get("http://artssspot.com/barcelona/wp-json/tribe_events/v2/sss_events/2018-03-17/2018-03-31/")
+    axios.get(route)
       .then((response) => {
         dispatch({type: "FETCH_EVENTS_FULFILLED", payload: response.data})
       })
@@ -17,28 +20,4 @@ export function fetchEvents() {
         dispatch({type: "FETCH_EVENTS_REJECTED", payload: err})
       })
   }
-}
-
-export function addTweet(id, text) {
-  return {
-    type: 'ADD_TWEET',
-    payload: {
-      id,
-      text,
-    },
-  }
-}
-
-export function updateTweet(id, text) {
-  return {
-    type: 'UPDATE_TWEET',
-    payload: {
-      id,
-      text,
-    },
-  }
-}
-
-export function deleteTweet(id) {
-  return { type: 'DELETE_TWEET', payload: id}
 }
