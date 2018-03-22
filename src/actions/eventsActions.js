@@ -1,5 +1,5 @@
 import axios from "axios";
-import Constants from "./config/constants";
+import Constants from "../config/constants";
 
 export function fetchEvents() {
   return function(dispatch) {
@@ -14,7 +14,7 @@ export function fetchEvents() {
 
     axios.get(route)
       .then((response) => {
-        dispatch({type: "FETCH_EVENTS_FULFILLED", payload: response.data})
+        dispatch({type: "FETCH_EVENTS_FULFILLED", payload: response.data })
       })
       .catch((err) => {
         dispatch({type: "FETCH_EVENTS_REJECTED", payload: err})

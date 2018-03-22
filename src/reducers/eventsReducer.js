@@ -1,7 +1,7 @@
 export default function reducer(state={
-    eventData: {},
-    lastUpdate: new Date(0);
-    viewing: 'All',
+    eventsData: [],
+    lastUpdate: new Date(0),
+    viewing: 'home',
     fetching: false,
     fetched: false,
     error: null,
@@ -19,7 +19,7 @@ export default function reducer(state={
           ...state,
           fetching: false,
           fetched: true,
-          eventData: action.payload,
+          eventsData: action.payload.posts,
         }
       }
     }
