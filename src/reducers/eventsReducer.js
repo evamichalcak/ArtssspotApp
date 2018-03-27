@@ -1,7 +1,16 @@
+import Constants from "../config/constants";
+let today = new Date;
+let endday = new Date;
+endday.setDate(endday.getDate() + Constants.DAY_OFFSET);
+
 export default function reducer(state={
+    responseData: [],
     eventsData: [],
+    viewingData: [],
     lastUpdate: new Date(0),
-    viewing: 'home',
+    firstDate: today.toISOString().slice(0, 10),
+    lastDate: endday.toISOString().slice(0, 10),
+    viewing: 'today',
     fetching: false,
     fetched: false,
     error: null,
@@ -19,7 +28,13 @@ export default function reducer(state={
           ...state,
           fetching: false,
           fetched: true,
-          eventsData: action.payload.posts,
+          eventsData: action.payload.eventsData,
+        }
+      }
+      case "FILTER_EVENTS": {
+        return {
+          ...state,
+          viewingData: action.payload,
         }
       }
     }

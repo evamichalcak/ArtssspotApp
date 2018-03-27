@@ -17,13 +17,17 @@ import { fetchEvents } from "../actions/eventsActions"
     //events: store.events.eventsData,
     fetching: store.events.fetching,
     dataSource: dataSource.cloneWithRows(store.events.eventsData),
+    eventsData: store.events.eventsData,
+    firstDate: store.events.firstDate,
+    lastDate: store.events.lastDate,
+    viewing: store.events.viewing,
   };
 })
 
 export default class EventView extends Component {
 
   componentWillMount() {
-    this.props.dispatch(fetchEvents())
+    this.props.dispatch(fetchEvents(this.props.firstDate, this.props.lastDate));
   }
 
   render() {
@@ -40,16 +44,16 @@ export default class EventView extends Component {
     return (
 
       <View style={{flex: 1, paddingTop: 20}}>
-        <Text>Hello World! ---- </Text>
+        <Text>Hello World! ---- {this.props.lastDate}</Text>
         <ListView
           enableEmptySections={true}
           dataSource={this.props.dataSource}
           renderRow={(rowData) => <View>
               <Image source={{uri:rowData.eventImage}} style={{width: 193, height: 110}} />
               <Text>{decode(rowData.eventTitle)}</Text> 
-              <Text>{new Date(rowData.EventStartDate.replace(/ /g, "T")).toLocaleDateString()} - {new Date(rowData.EventEndDate.replace(/ /g, "T")).toLocaleDateString()}</Text> 
-              <Text>{decode(rowData.eventVenueName)}</Text>
-              <Text style={styles.descriptionClosed}>{cleanText(rowData.eventExcerpt)}</Text>
+              <Text>{new Date(rowData.eventStart.replace(/ /g, "T")).toLocaleDateString()} - {new Date(rowData.eventEnd.replace(/ /g, "T")).toLocaleDateString()}</Text> 
+              <Text>{decode(rowData.eventVenue)}</Text>
+              <Text style={styles.descriptionClosed}>{cleanText(rowData.eventSummary)}</Text>
             </View>}
         />
       </View>
