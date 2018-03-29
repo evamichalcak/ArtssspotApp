@@ -11,6 +11,7 @@ export default function reducer(state={
     firstDate: today.toISOString().slice(0, 10),
     lastDate: endday.toISOString().slice(0, 10),
     viewing: 'today',
+    filtered: false,
     fetching: false,
     fetched: false,
     error: null,
@@ -34,6 +35,7 @@ export default function reducer(state={
       case "FILTER_EVENTS": {
         return {
           ...state,
+          filtered: true,
           viewingData: action.payload,
         }
       }

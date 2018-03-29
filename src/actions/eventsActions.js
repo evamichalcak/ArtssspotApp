@@ -13,7 +13,8 @@ export function fetchEvents(firstDate, lastDate) {
       .then((response) => {
         // map data from API to custom format
         eventsData = formatEventsArray(response.data);
-        dispatch({type: "FETCH_EVENTS_FULFILLED", payload: { rawData: response.data, eventsData: eventsData } })
+        dispatch({type: "FETCH_EVENTS_FULFILLED", payload: { rawData: response.data, eventsData: eventsData } });
+        dispatch(filterEvents('today', eventsData));
       })
       .catch((err) => {
         dispatch({type: "FETCH_EVENTS_REJECTED", payload: err})
@@ -28,18 +29,11 @@ export function filterEvents(viewing, data) {
     switch (viewing) {
       case "today": {
         filtered = filterForToday(data);
-        break;
-      }
-      default: {
-        filtered = null;
-        break;
       }
     }
     dispatch({type: "FILTER_EVENTS", payload: filtered});
   }
 }
-
-
 
 
 function formatEventsArray(data) {
@@ -67,9 +61,12 @@ function remapProps(obj, propMap) {
 
 
 function filterForToday(data) {
-  // pushes al events from data array that start after startdate in new array in ASC order
+  // pushes al events from data array that start before today into new array in ASC order
   let today = new Date;
-  return  data.filter(event => event.eventStart <= today);
+  let filtered=data.filter(function(item){
+    return new Date(item.eventStart.replace(/ /g, "T")) <= today;      
+  });
+  return filtered;
 }
 
 function filterForOpenings(startdate, data) {

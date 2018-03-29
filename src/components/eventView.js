@@ -16,11 +16,13 @@ import { fetchEvents } from "../actions/eventsActions"
   return {
     //events: store.events.eventsData,
     fetching: store.events.fetching,
-    dataSource: dataSource.cloneWithRows(store.events.eventsData),
+    dataSource: dataSource.cloneWithRows(store.events.viewingData),
     eventsData: store.events.eventsData,
+    viewingData: store.events.viewingData,
     firstDate: store.events.firstDate,
     lastDate: store.events.lastDate,
     viewing: store.events.viewing,
+    filtered: store.events.filtered,
   };
 })
 
@@ -28,12 +30,13 @@ export default class EventView extends Component {
 
   componentWillMount() {
     this.props.dispatch(fetchEvents(this.props.firstDate, this.props.lastDate));
+    console.log('dispateched from eventView');
   }
 
   render() {
-    const { events, fetching } = this.props;
+    const { events, fetching, filtered } = this.props;
 
-    if (fetching) {
+    if (!filtered) {
       return (
         <View>
           <ActivityIndicator />
