@@ -24,6 +24,7 @@ export function fetchEvents(firstDate, lastDate) {
 
 export function filterEvents(viewing, data) {
   return function(dispatch) {
+    //console.log('entered filterEvents');
     let filtered = [];
     // checks what we are viewing and filters for categories accordingly with filterForCat
     switch (viewing) {
