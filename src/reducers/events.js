@@ -1,53 +1,52 @@
-const event = (state, action) => {
+import { combineReducers } from 'redux';
+import event from './event';
+
+const byId = (state={}, action) => {
   switch (action.type) {
     case 'ADD_EVENT':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false
-      }
-    case 'TOGGLE_EVENT': 
-      if (state.id !== action.id) {
-        return state;
-      } 
+    case 'TOGGLE_EVENT':
       return {
         ...state,
-        completed: !state.completed
-      };
+        [action.id]: event(state[action.id], action)
+      }
     default:
       return state;
   }
 };
 
-const events = (state=[], action) => {
+const allIds = (state=[], action) => {
   switch (action.type) {
     case 'ADD_EVENT':
-      return [
-      ...state,
-      todo(undefined, action)
-      ]
-    case 'TOGGLE_EVENT': 
-      return state.map(t => 
-          todo(t, action)
-        );
+      return [...state, action.id];
     default:
       return state;
   }
 };
+
+const events = combineReducers({
+  byId,
+  allIds,
+});
 
 export default events;
 
+const getAllEvents = (state) => 
+  state.allIds.map(id => state.byId[id]);
+
 export const getVisibleEvents = (state, filter) => {
+  const allEvents = getAllEvents(state);
   switch (filter) {
     case 'SHOW_ALL': 
-      return state;
+      return allEvents;
     case 'SHOW_COMPLETED':
-      return state.filter(
+      return allEvents.filter(
         t => t.completed
       );
     case 'SHOW_ACTIVE':
-      return state.filter(
+      return allEvents.filter(
         t => !t.completed
       );
+    default:
+      throw new Error(`Unknown filter: ${filter}.`);
   }
 }

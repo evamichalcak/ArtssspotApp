@@ -3,24 +3,44 @@ import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import EventsList from './EventsList';
 import { toggleEvent } from '../actions';
-import { getVisibleEvents } from '../reducers';
+import { getVisibleEvents, getVisibilityFilter } from '../reducers';
+import { fetchEvents2 } from "../api";
 
+class VisibleEventsList extends React.Component {
 
-const mapStateToEventsListProps = (state) => {
+  fetchData() {
+    fetchEvents2(this.props.filter).then(events => console.log(this.props.filter, events));
+  }
+
+  componentDidMount() {
+      this.fetchData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.filter !== prevProps.filter) {
+      this.fetchData();
+    }
+  }
+
+  render() {
+    return <EventsList {...this.props} />;
+  }
+}
+
+const mapStateToVisibleEventsListProps = (state) => {
+  const filter = getVisibilityFilter(state);
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-  let dataSource = ds.cloneWithRows(getVisibleEvents(state, state.visibilityFilter));
+  let dataSource = ds.cloneWithRows(getVisibleEvents(state, filter));
   return {
-    events: getVisibleEvents(
-      state.events,
-      state.visibilityFilter,
-    ),
-    dataSource
+    events: getVisibleEvents(state, filter),
+    filter,
+    dataSource,
   };
 };
 
-const VisibleEventsList = connect(
-  mapStateToEventsListProps,
+VisibleEventsList = connect(
+  mapStateToVisibleEventsListProps,
   { onEventClick: toggleEvent }
-)(EventsList);
+)(VisibleEventsList);
 
 export default VisibleEventsList;
