@@ -2,14 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import EventsList from './EventsList';
-import { toggleEvent } from '../actions';
+import { fetchEvents, toggleEvent } from '../actions';
 import { getVisibleEvents, getVisibilityFilter } from '../reducers';
-import { fetchEvents2 } from "../api";
 
 class VisibleEventsList extends React.Component {
 
   fetchData() {
-    fetchEvents2(this.props.filter).then(events => console.log(this.props.filter, events));
+    fetchEvents(this.props.filter);
   }
 
   componentDidMount() {
@@ -40,7 +39,7 @@ const mapStateToVisibleEventsListProps = (state) => {
 
 VisibleEventsList = connect(
   mapStateToVisibleEventsListProps,
-  { onEventClick: toggleEvent }
+  { onEventClick: toggleEvent, fetchEvents }
 )(VisibleEventsList);
 
 export default VisibleEventsList;

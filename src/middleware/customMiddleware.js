@@ -7,7 +7,6 @@ export const selectInitialView = store => next => action => {
     return next(action);
   } else {
   	console.log('filterEvents call from middleware');
-  	//store.dispatch(filterEvents(store.events.viewing, action.payload.eventsData));
     return next(action);
   }
 }

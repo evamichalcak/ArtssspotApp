@@ -1,4 +1,7 @@
+import * as api from "../api";
+
 let nextEventId = 0;
+
 export const addEvent = (text) => {
   return {
     type: 'ADD_EVENT',
@@ -19,4 +22,17 @@ export const toggleEvent = (id) => {
     type: 'TOGGLE_EVENT',
     id
   }
+}
+
+const receiveEvent = (response) => {
+  return {
+    type: 'RECEIVE_EVENT',
+    response
+  }
+}
+
+export const fetchEvents = (filter) => {
+  api.fetchEvents2(filter).then(response => 
+    receiveEvent(response)
+  );
 }
