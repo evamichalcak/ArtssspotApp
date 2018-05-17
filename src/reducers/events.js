@@ -1,64 +1,17 @@
 import { combineReducers } from 'redux';
+import byId, * as fromById from './byId';
 import event from './event';
+import createList, * as fromList from './createList';
 
-const byId = (state={}, action) => {
-  switch (action.type) {
-    case 'ADD_EVENT':
-    case 'TOGGLE_EVENT':
-      return {
-        ...state,
-        [action.id]: event(state[action.id], action)
-      }
-    default:
-      return state;
-  }
-};
-
-const allIds = (state=[], action) => {
-  if (action.filter !== 'SHOW_ALL') {
-    return state;
-  }
-  switch (action.type) {
-    case 'RECEIVE_EVENTS':
-      return action.response.map(todo => todo.id);
-    default:
-      return state;
-  }
-};
-
-const activeIds = (state=[], action) => {
-  if (action.filter !== 'SHOW_ACTIVE') {
-    return state;
-  }
-  switch (action.type) {
-    case 'RECEIVE_EVENTS':
-      return action.response.map(todo => todo.id);
-    default:
-      return state;
-  }
-};
-
-const completedIds = (state=[], action) => {
-  if (action.filter !== 'SHOW_COMPLETED') {
-    return state;
-  }
-  switch (action.type) {
-    case 'RECEIVE_EVENTS':
-      return action.response.map(todo => todo.id);
-    default:
-      return state;
-  }
-};
-
-const idsByFilter = combineReducers({
-  SHOW_ALL: allIds,
-  SHOW_ACTIVE: activeIds, 
-  SHOW_COMPLETED: completedIds,
+const listByFilter = combineReducers({
+  SHOW_ALL: createList('SHOW_ALL'),
+  SHOW_ACTIVE: createList('SHOW_ACTIVE'), 
+  SHOW_COMPLETED: createList('SHOW_COMPLETED'),
 });
 
 const events = combineReducers({
   byId,
-  idsByFilter,
+  listByFilter,
 });
 
 export default events;
@@ -67,9 +20,12 @@ export default events;
 //   state.allIds.map(id => state.byId[id]);
 
 export const getVisibleEvents = (state, filter) => {
-  const ids = state.idsByFilter[filter];
-  return ids.map(id => state.byId[id]);
+  const ids = fromList.getIds(state.listByFilter[filter]);
+  return ids.map(id => fromById.getEvent(state.byId, id));
 }
+
+export const getIsFetching = (state, filter) => 
+  fromList.getIsFetching(state.listByFilter[filter]);
 
 // export const getVisibleEvents = (state, filter) => {
 //   const allEvents = getAllEvents(state);

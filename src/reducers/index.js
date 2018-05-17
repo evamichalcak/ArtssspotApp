@@ -12,6 +12,7 @@
 import { combineReducers } from 'redux';
 import events, * as fromEvents from './events';
 import visibilityFilter, * as fromVisibilityFilter from './visibilityFilter';
+import * as fromList from './createList';
 
 const eventsApp = combineReducers({events, visibilityFilter});
 
@@ -22,3 +23,6 @@ export const getVisibleEvents = (state, filter) =>
 
 export const getVisibilityFilter = (state) => 
 	fromVisibilityFilter.getVisibilityFilter(state.visibilityFilter);
+
+export const getIsFetching = (state, filter) => 
+	fromEvents.getIsFetching(state.events, filter);

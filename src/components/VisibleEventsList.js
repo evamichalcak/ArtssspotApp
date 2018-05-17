@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import EventsList from './EventsList';
-import { fetchEvents, toggleEvent } from '../actions';
-import { getVisibleEvents, getVisibilityFilter } from '../reducers';
+import { fetchEvents, toggleEvent, requestEvents } from '../actions';
+import { getVisibleEvents, getVisibilityFilter, getIsFetching } from '../reducers';
 
 class VisibleEventsList extends React.Component {
 
   fetchData() {
+    requestEvents(this.props.filter);
     fetchEvents(this.props.filter);
   }
 
@@ -22,6 +23,9 @@ class VisibleEventsList extends React.Component {
   }
 
   render() {
+    if (this.props.isFetching && !this.props.events.length) {
+      return <p>Loading...</p>;
+    }
     return <EventsList {...this.props} />;
   }
 }
@@ -34,6 +38,7 @@ const mapStateToVisibleEventsListProps = (state) => {
     events: getVisibleEvents(state, filter),
     filter,
     dataSource,
+    isFetching: getIsFetching(state, filter)
   };
 };
 

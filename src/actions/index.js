@@ -24,15 +24,23 @@ export const toggleEvent = (id) => {
   }
 }
 
-const receiveEvent = (response) => {
+export const requestEvents = (filter) => {
   return {
-    type: 'RECEIVE_EVENT',
-    response
+    type: 'REQUEST_EVENTS',
+    filter
+  }
+}
+
+const receiveEvents = (response, filter) => {
+  return {
+    type: 'RECEIVE_EVENTS',
+    response,
+    filter
   }
 }
 
 export const fetchEvents = (filter) => {
   api.fetchEvents2(filter).then(response => 
-    receiveEvent(response)
+    receiveEvents(response)
   );
 }
