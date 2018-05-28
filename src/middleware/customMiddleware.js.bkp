@@ -1,4 +1,4 @@
-import { fetchEvents } from "../actions/eventsActions"
+import { xxxfetchEvents } from "../actions/eventsActions"
 
 export const selectInitialView = store => next => action => {
   console.log('enter middleware');

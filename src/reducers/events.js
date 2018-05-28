@@ -27,6 +27,9 @@ export const getVisibleEvents = (state, filter) => {
 export const getIsFetching = (state, filter) => 
   fromList.getIsFetching(state.listByFilter[filter]);
 
+export const getErrorMessage = (state, filter) => 
+  fromList.getErrorMessage(state.listByFilter[filter]);
+
 // export const getVisibleEvents = (state, filter) => {
 //   const allEvents = getAllEvents(state);
 //   switch (filter) {

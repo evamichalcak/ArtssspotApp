@@ -26,3 +26,6 @@ export const getVisibilityFilter = (state) =>
 
 export const getIsFetching = (state, filter) => 
 	fromEvents.getIsFetching(state.events, filter);
+
+export const getErrorMessage = (state, filter) => 
+	fromEvents.getErrorMessage(state.events, filter);

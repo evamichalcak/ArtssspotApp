@@ -2,26 +2,33 @@
 // that would be implemented by calling a REST server.
 
 const fakeDatabase = {
-  events: [{
+  events: [
+  {
     id: 'a0',
     text: 'hey',
     completed: true,
-  }, {
+  }, 
+  {
     id: 'a1',
     text: 'ho',
     completed: true,
-  }, {
+  }, 
+  {
     id: 'a2',
     text: 'let’s go',
     completed: false,
-  }],
+  }
+  ],
 };
 
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchEvents2 = (filter) =>
-  delay(500).then(() => {
+  delay(5000).then(() => {
+    if (Math.random() > 0.5) {
+      throw new Error('Boom!');
+    }
     switch (filter) {
       case 'SHOW_ALL':
         return fakeDatabase.events;

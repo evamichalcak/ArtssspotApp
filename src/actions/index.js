@@ -1,4 +1,5 @@
 import * as api from "../api";
+import { getIsFetching } from "../reducers";
 
 let nextEventId = 0;
 
@@ -24,23 +25,34 @@ export const toggleEvent = (id) => {
   }
 }
 
-export const requestEvents = (filter) => {
-  return {
-    type: 'REQUEST_EVENTS',
-    filter
+//thunk action
+export const fetchEvents = (filter) => (dispatch, getState) => {
+  //we have already a api request running for this filter
+  if (getIsFetching(getState(), filter)) {
+    return Promise.resolve();
   }
-}
-
-const receiveEvents = (response, filter) => {
-  return {
-    type: 'RECEIVE_EVENTS',
-    response,
-    filter
-  }
-}
-
-export const fetchEvents = (filter) => {
-  api.fetchEvents2(filter).then(response => 
-    receiveEvents(response)
+  //announce fetching start
+  dispatch({
+      type: 'FETCH_EVENTS_REQUEST',
+      filter
+    });
+  //fetch from api
+  return api.fetchEvents2(filter).then(
+    response => {
+      //announce fetching end
+      dispatch({
+        type: 'FETCH_EVENTS_SUCCESS',
+        response,
+        filter
+      });
+    },
+    error => {
+      //transmit error
+      dispatch({
+        type: 'FETCH_EVENTS_FAILURE',
+        filter,
+        message: error.message || 'Something went wrong'
+      });
+    }
   );
 }

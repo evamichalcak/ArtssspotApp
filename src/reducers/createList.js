@@ -6,7 +6,7 @@ const createList = (filter) => {
       return state;
     }
     switch (action.type) {
-      case 'RECEIVE_EVENTS':
+      case 'FETCH_EVENTS_SUCCESS':
         return action.response.map(todo => todo.id);
       default:
         return state;
@@ -18,10 +18,26 @@ const createList = (filter) => {
       return state;
     }
     switch (action.type) {
-      case 'REQUEST_EVENTS':
+      case 'FETCH_EVENTS_REQUEST':
         return true;
-      case 'RECEIVE_EVENTS':
+      case 'FETCH_EVENTS_SUCCESS':
+      case 'FETCH_EVENTS_FAILURE':
         return false;
+      default:
+        return state;
+    }
+  }
+
+  const errorMessage = (state = null, action) => {
+    if (filter !== action.filter) {
+      return state;
+    }
+    switch (action.type) {
+      case 'FETCH_EVENTS_FAILURE':
+        return action.message;
+      case 'FETCH_EVENTS_SUCCESS':
+      case 'FETCH_EVENTS_REQUEST':
+        return null;
       default:
         return state;
     }
@@ -30,6 +46,7 @@ const createList = (filter) => {
   return combineReducers({
     ids,
     isFetching,
+    errorMessage,
   });
 
 };
@@ -37,4 +54,5 @@ const createList = (filter) => {
 export default createList;
 
 export const getIds = (state) => state.ids;
-export const getIsFetching = (state) => state.IsFetching;
+export const getIsFetching = (state) => state.isFetching;
+export const getErrorMessage = (state) => state.errorMessage;

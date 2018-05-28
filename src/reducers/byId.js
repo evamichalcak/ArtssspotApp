@@ -1,6 +1,6 @@
 const byId = (state={}, action) => {
   switch (action.type) {
-    case 'RECEIVE_EVENTS':
+    case 'FETCH_EVENTS_SUCCESS':
       const nextState = { ...state };
       action.response.forEach(event => {
         nextState[event.id] = event;
