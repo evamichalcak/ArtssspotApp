@@ -1,17 +1,35 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
+import { decode } from 'he';
+import { cleanText, cleanDate } from '../helpers';
 
 class Event extends React.Component {
   render() {
     return (
       <TouchableHighlight onPress={this.props.onClick}>
-        <Text style={{
-          textDecorationLine: this.props.completed ? 'line-through' : 'none', 
-          textDecorationStyle: 'solid'
-        }}>{this.props.text} + {this.props.completed + ''}</Text>
+        <View>        
+          <Image source={{uri:this.props.image}} style={{width: 193, height: 110}} />
+          <Text>{decode(this.props.title)}</Text> 
+          <Text>{cleanDate(this.props.start)} - {cleanDate(this.props.end)}</Text> 
+          <Text>{decode(this.props.venue)}</Text>
+          <Text>{decode(this.props.address)}</Text>
+          <Text style={styles.descriptionClosed}>{cleanText(this.props.summary)}</Text>
+        </View>
       </TouchableHighlight>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  descriptionClosed: {
+    height: 0
+  },
+});
 
 export default Event;

@@ -11,6 +11,13 @@ class EventsList extends React.Component {
           <Event 
             completed={rowData.completed} 
             text={rowData.text} 
+            title={rowData.eventTitle}
+            image={rowData.eventImage}
+            start={rowData.EventStartDate}
+            end={rowData.EventEndDate}
+            venue={rowData.eventVenueName}
+            address={rowData.eventVenueAddress}
+            summary={rowData.eventExcerpt}
             onClick={() => {this.props.onEventClick(rowData.id)}} 
           />
         }
