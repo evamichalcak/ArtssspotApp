@@ -23,7 +23,6 @@ class VisibleEventsList extends React.Component {
   }
 
   render() {
-    console.log('condtion 1', this.props.isFetching);
     if (this.props.isFetching && !this.props.events.length) {
       return <Text>Loading...</Text>;
     }
@@ -43,7 +42,6 @@ const mapStateToVisibleEventsListProps = (state) => {
   const filter = getVisibilityFilter(state);
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
   let dataSource = ds.cloneWithRows(getVisibleEvents(state, filter));
-    console.log('mapstate...', getIsFetching(state, filter));
   return {
     events: getVisibleEvents(state, filter),
     filter,

@@ -1,5 +1,7 @@
 import * as api from "../api";
 import { getIsFetching } from "../reducers";
+import { normalize } from 'normalizr';
+import * as schema from './schema';
 
 let nextEventId = 0;
 
@@ -42,7 +44,7 @@ export const fetchEvents = (filter) => (dispatch, getState) => {
       //announce fetching end
       dispatch({
         type: 'FETCH_EVENTS_SUCCESS',
-        response,
+        response: normalize( response, schema.eventsListSchema),
         filter
       });
     },

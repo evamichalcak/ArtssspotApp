@@ -7,7 +7,9 @@ const createList = (filter) => {
     }
     switch (action.type) {
       case 'FETCH_EVENTS_SUCCESS':
-        return action.response.map(todo => todo.id);
+        return filter === action.filter ? 
+          action.response.result : 
+          state;
       default:
         return state;
     }
