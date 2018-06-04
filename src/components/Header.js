@@ -1,14 +1,18 @@
 import React from 'react';
 import { View } from 'react-native';
 import FilterLink from './FilterLink';
+import Constants from "../config/constants";
 
 class Header extends React.Component {
   render() {
     return (
       <View>
-        <FilterLink text='All' filter='SHOW_ALL' />
-        <FilterLink text='Active' filter='SHOW_ACTIVE' />
-        <FilterLink text='Completed' filter='SHOW_COMPLETED' />
+        <FilterLink text='Home' filter='home' />
+        <FilterLink text='Próximas inauguraciones' filter={Constants.CATS['Próximas inauguraciones']} />
+        <FilterLink text='Los imperdibles' filter={Constants.CATS['Los imperdibles']} />
+        <FilterLink text='Los recomendados' filter={Constants.CATS['Los recomendados']} />
+        <FilterLink text='Para descubrir' filter={Constants.CATS['Para descubrir']} />
+        <FilterLink text='Todo' filter='all' />
       </View>
     );
   }

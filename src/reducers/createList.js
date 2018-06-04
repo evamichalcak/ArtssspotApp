@@ -5,11 +5,16 @@ const createList = (filter) => {
     if (action.filter !== filter) {
       return state;
     }
+    console.log(filter);
     switch (action.type) {
       case 'FETCH_EVENTS_SUCCESS':
-        return filter === action.filter ? 
-          action.response.result : 
-          state;
+        if (action.filter === ('home' || 'all')) {
+          return action.response.result;
+        } else {
+          return filter === action.filter ? 
+            action.response.entities.eventCategories[filter].posts : 
+            state;
+        }
       default:
         return state;
     }

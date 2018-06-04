@@ -66,7 +66,7 @@ const getDateString = (offset) => {
 
 
 
-export const fetchEvents3 = (filter, firstDate, lastDate) => {
+export const fetchEvents3 = (firstDate, lastDate) => {
     // getting dates for API call
     firstDate = firstDate || getDateString();
     lastDate = lastDate || getDateString(Constants.DAY_OFFSET);
@@ -80,17 +80,8 @@ export const fetchEvents3 = (filter, firstDate, lastDate) => {
     // if (Math.random() > 0.5) {
     //   throw new Error('Boom!');
     // }
-    console.log(response.data.found_posts);
-    switch (filter) {
-      case 'SHOW_ALL':
-        return response.data.posts;
-      case 'SHOW_ACTIVE':
-        return response.data.posts;
-      case 'SHOW_COMPLETED':
-        return response.data.posts;
-      default:
-        throw new Error(`Unknown filter: ${filter}`);
-    }
+
+    return response.data.posts;
 
   });
 }

@@ -4,7 +4,7 @@ import event from './event';
 import createList, * as fromList from './createList';
 
 const listByFilter = combineReducers({
-  SHOW_ALL: createList('SHOW_ALL'),
+  home: createList('home'),
   SHOW_ACTIVE: createList('SHOW_ACTIVE'), 
   SHOW_COMPLETED: createList('SHOW_COMPLETED'),
 });

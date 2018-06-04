@@ -5,14 +5,6 @@ import * as schema from './schema';
 
 let nextEventId = 0;
 
-export const addEvent = (text) => {
-  return {
-    type: 'ADD_EVENT',
-    id: nextEventId++,
-    text
-  }
-}
-
 export const setVisibilityFilter = (filter) => {
   return {
       type: 'SET_VISIBILITY_FILTER',
@@ -39,7 +31,7 @@ export const fetchEvents = (filter) => (dispatch, getState) => {
       filter
     });
   //fetch from api
-  return api.fetchEvents3(filter).then(
+  return api.fetchEvents3().then(
     response => {
       console.log(normalize( response, schema.eventsListSchema));
       //announce fetching end
