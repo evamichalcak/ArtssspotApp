@@ -33,7 +33,7 @@ export const fetchEvents = (filter) => (dispatch, getState) => {
   //fetch from api
   return api.fetchEvents3().then(
     response => {
-      console.log(normalize( response, schema.eventsListSchema));
+      //console.log(normalize( response, schema.eventsListSchema));
       //announce fetching end
       dispatch({
         type: 'FETCH_EVENTS_SUCCESS',
