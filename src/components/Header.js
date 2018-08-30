@@ -7,12 +7,12 @@ class Header extends React.Component {
   render() {
     return (
       <View style={{marginTop: 20}}>
-        <FilterLink text='Home' filter='home' />
-        <FilterLink text='Próximas inauguraciones' filter={Constants.CATS['Próximas inauguraciones']} />
-        <FilterLink text='Los imperdibles' filter={Constants.CATS['Los imperdibles']} />
-        <FilterLink text='Los recomendados' filter={Constants.CATS['Los recomendados']} />
-        <FilterLink text='Para descubrir' filter={Constants.CATS['Para descubrir']} />
-        <FilterLink text='Todo' filter='all' />
+        <FilterLink text={Constants.CATS['home'].text} filter={Constants.CATS['home'].id} />
+        <FilterLink text={Constants.CATS['proximas-inauguraciones'].text} filter={Constants.CATS['proximas-inauguraciones'].id} />
+        <FilterLink text={Constants.CATS['los-imperdibles'].text} filter={Constants.CATS['los-imperdibles'].id} />
+        <FilterLink text={Constants.CATS['los-recomendados'].text} filter={Constants.CATS['los-recomendados'].id} />
+        <FilterLink text={Constants.CATS['para-descubrir'].text} filter={Constants.CATS['para-descubrir'].id} />
+        <FilterLink text={Constants.CATS['all'].text} filter={Constants.CATS['all'].id} />
       </View>
     );
   }
