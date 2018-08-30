@@ -67,12 +67,14 @@ const getDateString = (offset) => {
 
 
 export const fetchEvents3 = (firstDate, lastDate) => {
+    console.log('fetchEvents3');
     // getting dates for API call
     firstDate = firstDate || getDateString();
     lastDate = lastDate || getDateString(Constants.DAY_OFFSET);
     
     // putting together API endpoint
     let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/';
+    //console.log('route: ' + route);
     
 
     return axios.get(route)

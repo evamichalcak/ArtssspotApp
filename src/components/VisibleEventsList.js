@@ -9,6 +9,7 @@ import FetchError from './FetchError';
 class VisibleEventsList extends React.Component {
 
   fetchData() {
+    console.log('fetchData');
     this.props.fetchEvents(this.props.filter);
   }
 
@@ -17,9 +18,11 @@ class VisibleEventsList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // console.log(JSON.stringify(prevProps.state), 'componentDidUpdate of VisibleEventsList');
     if (this.props.filter !== prevProps.filter) {
-      this.fetchData();
+      this.props.fetchEvents(this.props.filter);
     }
+    
   }
 
   render() {

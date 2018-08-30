@@ -6,7 +6,7 @@ import Constants from "../config/constants";
 class Header extends React.Component {
   render() {
     return (
-      <View>
+      <View style={{marginTop: 20}}>
         <FilterLink text='Home' filter='home' />
         <FilterLink text='Próximas inauguraciones' filter={Constants.CATS['Próximas inauguraciones']} />
         <FilterLink text='Los imperdibles' filter={Constants.CATS['Los imperdibles']} />
@@ -17,4 +17,5 @@ class Header extends React.Component {
     );
   }
 }
+//console.log('const filter: ' + Constants.CATS['Próximas inauguraciones']);
 export default Header;

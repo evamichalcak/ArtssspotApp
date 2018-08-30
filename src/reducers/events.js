@@ -5,8 +5,12 @@ import createList, * as fromList from './createList';
 
 const listByFilter = combineReducers({
   home: createList('home'),
-  SHOW_ACTIVE: createList('SHOW_ACTIVE'), 
-  SHOW_COMPLETED: createList('SHOW_COMPLETED'),
+  all: createList('all'),
+  '100': createList('100'),
+  '101': createList('101'),
+  '102': createList('102'),
+  '99': createList('99'),
+  '190': createList('190'),
 });
 
 const events = combineReducers({
@@ -20,7 +24,10 @@ export default events;
 //   state.allIds.map(id => state.byId[id]);
 
 export const getVisibleEvents = (state, filter) => {
+	console.log('in getVisibleEvents: ' + filter);
   const ids = fromList.getIds(state.listByFilter[filter]);
+  console.log(ids);
+  //console.log(JSON.stringify(state), 'in getVisibleEvents');
   return ids.map(id => fromById.getEvent(state.byId, id));
 }
 
