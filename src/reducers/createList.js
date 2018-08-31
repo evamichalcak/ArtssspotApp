@@ -1,3 +1,4 @@
+// before category api refactor
 import { combineReducers } from 'redux';  
 
 const createList = (filter) => {
