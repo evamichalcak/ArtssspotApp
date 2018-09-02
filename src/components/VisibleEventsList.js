@@ -18,7 +18,6 @@ class VisibleEventsList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log(JSON.stringify(prevProps.state), 'componentDidUpdate of VisibleEventsList');
     if (this.props.filter !== prevProps.filter) {
       this.props.fetchEvents(this.props.filter);
     }

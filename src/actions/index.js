@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { getIsFetching } from "../reducers";
+import { getIsFetching, getVisibleEvents } from "../reducers";
 import { normalize } from 'normalizr';
 import * as schema from './schema';
 
@@ -26,6 +26,15 @@ export const fetchEvents = (filter) => (dispatch, getState) => {
   //we have already a api request running for this filter
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve();
+  }
+  //we have already a data for this filter
+  let dataArr = getVisibleEvents(getState(), filter);
+  if (dataArr.length > 0) {
+    return {
+      type: 'SWITCH_EVENTS',
+      filter,
+      data: dataArr,
+    }
   }
   //announce fetching start
   dispatch({

@@ -1,0 +1,9 @@
+-category pages call with category api
+-all page call with date api
+-home page calls 3 categories in 3 containers
+-createList just creates lists, from a filter over ById, does nothing more
+-state gets saved before createList gets called
+
+-createList should receive state and action and read filter from visibilityFilter in state
+
+-REMOVE CASE 'categories' in ids function of createList
