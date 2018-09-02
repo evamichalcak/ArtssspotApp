@@ -27,15 +27,6 @@ export const fetchEvents = (filter) => (dispatch, getState) => {
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve();
   }
-  //we have already a data for this filter
-  let dataArr = getVisibleEvents(getState(), filter);
-  if (dataArr.length > 0) {
-    return {
-      type: 'SWITCH_EVENTS',
-      filter,
-      data: dataArr,
-    }
-  }
   //announce fetching start
   dispatch({
       type: 'FETCH_EVENTS_REQUEST',

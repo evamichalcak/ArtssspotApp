@@ -4,12 +4,14 @@ import { combineReducers } from 'redux';
 const createList = (filter) => {
 
   const ids = (state = [], action) => {
-    //generate all lists on first api fetch
+    if (action.filter !== filter) {
+      return state;
+    }
     switch (action.type) {
       case 'FETCH_EVENTS_SUCCESS':
-        if (filter === 'all') {
+        if (action.filter === 'all') {
           return action.response.result;
-        } else if (filter === 'home') {
+        } else if (action.filter === 'home') {
           let homearr = [
             ...action.response.entities.eventCategories['100']['posts'],
             ...action.response.entities.eventCategories['101']['posts'],
@@ -17,7 +19,9 @@ const createList = (filter) => {
             ]
           return homearr;
         } else {
-          return action.response.entities.eventCategories[filter]['posts'];
+          return filter === action.filter ? 
+            action.response.entities.eventCategories[filter]['posts'] : 
+            state;
         }
       default:
         return state;
