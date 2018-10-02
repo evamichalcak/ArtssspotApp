@@ -1,3 +1,6 @@
+-API: remove futures from categories
+
+
 -category pages call with category api
 -all page call with date api
 -home page calls 3 categories in 3 containers
@@ -7,3 +10,24 @@
 -createList should receive state and action and read filter from visibilityFilter in state
 
 -REMOVE CASE 'categories' in ids function of createList
+
+
+
+
+APP features:
+-------------
+
+-view home
+-view unmissables
+-recommended
+-view by category
+-view activities
+-view by day (with calendar to select)
+-view saved events
+
+-view event details
+-view event in browser
+-save event
+
+-choose city
+-choose language (google translate api?)
