@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import FilterLink from './FilterLink';
 import EventsList from './EventsList';
 import VisibleEventsList from './VisibleEventsList';
-import Header from './Header';
+
 
 
 export default class ArtssspotApp extends React.Component {
@@ -26,7 +26,6 @@ export default class ArtssspotApp extends React.Component {
     return (
       <View style={styles.container}>
 
-        <Header />
 
         <VisibleEventsList />
 
