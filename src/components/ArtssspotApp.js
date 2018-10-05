@@ -17,15 +17,20 @@ import { connect } from 'react-redux';
 import FilterLink from './FilterLink';
 import EventsList from './EventsList';
 import VisibleEventsList from './VisibleEventsList';
+import { createStackNavigator } from 'react-navigation';
+import Header from './Header';
+import Constants from "../config/constants";
 
 
 
 export default class ArtssspotApp extends React.Component {
+  static navigationOptions = {
+    headerTitle: <Header />,
+  };
 
   render() {
     return (
       <View style={styles.container}>
-
 
         <VisibleEventsList />
 

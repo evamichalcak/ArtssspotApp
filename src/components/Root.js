@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import ArtssspotApp from './ArtssspotApp';
-import { Button, View, Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { ScrollView, Button, View, Text, StyleSheet } from 'react-native';
+import { createDrawerNavigator, createStackNavigator, NavigationActions, DrawerActions, DrawerItems, SafeAreaView } from 'react-navigation';
 import Header from './Header';
 
+
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    headerTitle: <Header />,
+  };
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Header />
+        <Text>Home Screen</Text>    
         <Button
-          title="Go to Artssspot"
+          title="Go to Details"
           onPress={() => this.props.navigation.navigate('Artssspot')}
         />
       </View>
@@ -20,15 +23,21 @@ class HomeScreen extends React.Component {
   }
 }
 
+
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Artssspot: ArtssspotApp,
+    Home: {
+        screen: HomeScreen,
+    },
+    Artssspot: {
+        screen: ArtssspotApp,
+    },
   },
   {
     initialRouteName: 'Home',
   }
 );
+
 
 export default class Root extends Component {
 	render() {
@@ -39,3 +48,20 @@ export default class Root extends Component {
 		);
 	} 
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }, 
+  test1: {
+  	backgroundColor: '#f00',
+  }, 
+  test2: {
+  	backgroundColor: '#00f',
+  }
+
+});
