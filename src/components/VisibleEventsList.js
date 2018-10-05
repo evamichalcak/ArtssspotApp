@@ -40,8 +40,8 @@ class VisibleEventsList extends React.Component {
   }
 }
 
-const mapStateToVisibleEventsListProps = (state) => {
-  const filter = getVisibilityFilter(state);
+const mapStateToVisibleEventsListProps = (state, ownProps) => {
+  const filter=ownProps.filter;
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
   let dataSource = ds.cloneWithRows(getVisibleEvents(state, filter));
   return {

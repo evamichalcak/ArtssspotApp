@@ -1,20 +1,33 @@
 import { combineReducers } from 'redux';
-import events, * as fromEvents from './events';
-import visibilityFilter, * as fromVisibilityFilter from './visibilityFilter';
-import * as fromList from './createList';
+import byId, * as fromById from './byId';
+import event from './event';
+import createList, * as fromList from './createList';
+import Constants from "../config/constants";
 
-const eventsApp = combineReducers({events, visibilityFilter});
 
-export default eventsApp;
+let redObj = {};
 
-export const getVisibleEvents = (state, filter) => 
-	fromEvents.getVisibleEvents(state.events, filter);
+//generate reducer object for all categories present in the config file
+for (cat in Constants.CATS) {
+  redObj[Constants.CATS[cat].id]=createList(Constants.CATS[cat].id);
+};
 
-export const getVisibilityFilter = (state) => 
-	fromVisibilityFilter.getVisibilityFilter(state.visibilityFilter);
+const listByFilter = combineReducers(redObj);
+
+const events = combineReducers({
+  byId,
+  listByFilter,
+});
+
+export default events;
+
+export const getVisibleEvents = (state, filter) => {
+  const ids = fromList.getIds(state.listByFilter[filter]);
+  return ids.map(id => fromById.getEvent(state.byId, id));
+}
 
 export const getIsFetching = (state, filter) => 
-	fromEvents.getIsFetching(state.events, filter);
+  fromList.getIsFetching(state.listByFilter[filter]);
 
 export const getErrorMessage = (state, filter) => 
-	fromEvents.getErrorMessage(state.events, filter);
+  fromList.getErrorMessage(state.listByFilter[filter]);

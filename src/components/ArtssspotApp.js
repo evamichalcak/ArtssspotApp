@@ -27,12 +27,11 @@ export default class ArtssspotApp extends React.Component {
   static navigationOptions = {
     headerTitle: <Header />,
   };
-
   render() {
     return (
       <View style={styles.container}>
 
-        <VisibleEventsList />
+        <VisibleEventsList filter={this.props.navigation.getParam('cat', 'home')} />
 
       </View>
     );

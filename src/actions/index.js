@@ -5,13 +5,13 @@ import * as schema from './schema';
 
 let nextEventId = 0;
 
-export const setVisibilityFilter = (filter) => {
-  console.log('visibility filter in setVisibilityFilter: ' + filter);
-  return {
-      type: 'SET_VISIBILITY_FILTER',
-      filter
-    }
-}
+// export const setVisibilityFilter = (filter) => {
+//   console.log('visibility filter in setVisibilityFilter: ' + filter);
+//   return {
+//       type: 'SET_VISIBILITY_FILTER',
+//       filter
+//     }
+// }
 
 export const toggleEvent = (filter) => {
   console.log('visibility filter in toggleEvent: ' + filter);
