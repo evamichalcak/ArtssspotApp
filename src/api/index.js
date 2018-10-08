@@ -65,6 +65,31 @@ const getDateString = (offset) => {
 }
 
 
+export const fetchEvents = ( category, config = {}) => {
+  // all calls have main category. Could be 'all' to ignore category
+  // optional config object: startdate, enddate, include, exclude, sortby, order
+  // paremeters to add or exclude second category: ?include=catlist / ?exclude=catlist
+  console.log('fetchEventsNew');
+  // getting dates for API call
+  let firstDate = config.startdate || getDateString();
+  //lastDate = config.enddate || getDateString(Constants.DAY_OFFSET);
+  let lastDate = config.enddate || firstDate;
+
+   // putting together API endpoint
+    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/' + category;
+    //console.log('route: ' + route);
+    
+
+    return axios.get(route)
+    .then((response) => {
+    // if (Math.random() > 0.5) {
+    //   throw new Error('Boom!');
+    // }
+
+    return response.data.posts;
+
+}
+
 
 export const fetchEvents3 = (firstDate, lastDate) => {
     console.log('fetchEvents3');

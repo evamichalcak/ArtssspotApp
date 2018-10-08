@@ -13,6 +13,12 @@
 
 
 
+API:
+-all calls have main category. Could be 'all' or null
+-optional dates: only start date, startdate & enddate
+-paremeters to add or exclude second category: ?include=catlist / ?exclude=catlist
+
+
 
 APP features:
 -------------
