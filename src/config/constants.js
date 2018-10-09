@@ -5,12 +5,12 @@ const Constants = {
     'home': {
       id: 'home',
       text: 'Home',
-      slug: 'sss-home'
+      slug: ''
     },
     'all' : {
       id: 'all',
       text: 'All',
-      slug: ''
+      slug: 'all'
     },
     'los-imperdibles': {
       id: '100',
