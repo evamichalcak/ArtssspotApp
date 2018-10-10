@@ -65,7 +65,7 @@ const getDateString = (offset) => {
 }
 
 
-export const fetchEvents = ( category, config = {}) => {
+export const fetchEvents = ( categoryId, config = {}) => {
   // all calls have main category. Could be 'all' to ignore category
   // optional config object: startdate, enddate, overlap, exclude, orderby, order
   // paremeters to mandatory add or exclude second category: ?overlap=cat or ?exclude=cat
@@ -81,8 +81,20 @@ export const fetchEvents = ( category, config = {}) => {
   //lastDate = config.enddate || getDateString(Constants.DAY_OFFSET);
   let lastDate = config.enddate || firstDate;
 
+  let paramString = '?';
+
+  if (config.overlap) {
+
+  }
+  if (config.exclude) {
+
+  }
+  if (config.soon) {
+
+  }
+
    // putting together API endpoint
-    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/' + category;
+    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/cat/' + categoryId + paramSting;
     //console.log('route: ' + route);
     
 

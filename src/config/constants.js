@@ -5,37 +5,44 @@ const Constants = {
     'home': {
       id: 'home',
       text: 'Home',
-      slug: ''
+      slug: '',
+      params: ''
     },
     'all' : {
       id: 'all',
       text: 'All',
-      slug: 'all'
+      slug: 'all',
+      params: ''
     },
     'los-imperdibles': {
       id: '100',
       text: 'Los imperdibles',
-      slug: 'los-imperdibles'
+      slug: 'los-imperdibles',
+      params: ''
     }, //100
     'los-recomendados': {
       id: '101',
       text: 'Los recomendados',
-      slug: 'los-recomendados'
+      slug: 'los-recomendados',
+      params: ''
     }, //101
     'para-descubrir':  {
       id: '102',
       text: 'Para descubrir',
-      slug: 'para-descubrir'
+      slug: 'para-descubrir',
+      params: ''
     }, //102
     'actividades-recomendadas': {
       id: '99',
       text: 'Actividades recomendadas',
-      slug: 'actividades-recomendadas'
+      slug: 'actividades-recomendadas',
+      params: ''
     }, //99
     'proximas-inauguraciones': {
       id: '190',
       text: 'Próximas inauguraciones',
-      slug: 'proximas-inauguraciones'
+      slug: 'proximas-inauguraciones',
+      params: 'soon=starting'
     }, //190
   },
 }
