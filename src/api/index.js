@@ -68,9 +68,10 @@ const getDateString = (offset) => {
 export const fetchEvents = ( category, config = {}) => {
   // all calls have main category. Could be 'all' to ignore category
   // optional config object: startdate, enddate, overlap, exclude, orderby, order
-  // paremeters to mandatory add or exclude second category: ?overlap=cat / ?exclude=cat
+  // paremeters to mandatory add or exclude second category: ?overlap=cat or ?exclude=cat
   // parameters to change order: order=ASC or order=DESC, default is ASC
-  // parameter to change order key: orderby=_EventStartDate or orderby=_EventEndDate, default is _EventStartDate
+  // parameter to show only events starting or finishing in selected time interval: ?soon=starting or ?soon=ending
+  // parameter to change order key: ?orderby=_EventStartDate or ?orderby=_EventEndDate, default is _EventStartDate
   // when the orderby parameter is used with _EventEndDate, response fields _EventStartDate and _EventEndDate are both set to _EventEndDate, 
   // so use eventStart and eventEnd instead!!!
   

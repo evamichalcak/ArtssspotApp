@@ -515,7 +515,8 @@ function my_custom_fonts() {
 
 // paremeters to mandatory add or exclude second category: ?overlap=cat or ?exclude=cat
 // parameters to change order: order=ASC or order=DESC, default is ASC
-// parameter to change order key: orderby=_EventStartDate or orderby=_EventEndDate, default is _EventStartDate
+// parameter to show only events starting or finishing in selected time interval: ?soon=starting or ?soon=ending
+// parameter to change order key: ?orderby=_EventStartDate or ?orderby=_EventEndDate, default is _EventStartDate
 // when the orderby parameter is used with _EventEndDate, response fields _EventStartDate and _EventEndDate are both set to _EventEndDate, 
 // so use eventStart and eventEnd instead!!!
 
@@ -549,19 +550,21 @@ function shorten_text($text, $max_length = 350, $cut_off = '...', $keep_word = t
 function tribe_api_query( $query ) {
 //see comment on top of section for api parameters
 
+	// check for order filter and or set default
 	if (isset($query['order'])) {
 		$order = $query['order'];
 	} else {
 		$order = 'ASC';
 	}
 
+	// check for orderby filter and or set default
 	if (isset($query['orderby'])) {
 		$orderby = $query['orderbykey'];
 	} else {
 		$orderby = '_EventStartDate';
 	}
 	
-	
+	// set default args
 	$args = array(
 	  'post_status'=>'publish',
 	  'post_type'=>array(TribeEvents::POSTTYPE),
@@ -587,9 +590,25 @@ function tribe_api_query( $query ) {
 	    )
 	);
 
+	// check for soon filter and update meta_query correspondendingly
+	if (isset($query['soon'])) {
+		if ($query['soon'] == 'starting') {
+			$args['meta_query'][1] = array(
+				'key'     => '_EventStartDate',
+				'value'   => $query['start_date'],
+				'compare' => '>='
+			);
+		}
+		if ($query['soon'] == 'ending') {
+			$args['meta_query'][0] = array(
+				'key'     => '_EventEndDate',
+				'value'   => $query['end_date'],
+				'compare' => '<='
+			);
+		}
+	}
 
-
-
+	// check for category in both rout types and update tax_query correspondendingly
 	if  ( ( (isset($query['category'])) && ($query['category'] !== 'all') ) || (isset($query['categoryid'])) ) {
 	//query events by category
 		//adapt to query format
