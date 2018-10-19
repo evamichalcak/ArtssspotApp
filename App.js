@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import configureStore from './src/config/configureStore';
-import Root from './src/components/Root';
+//import { View } from 'react-native';
+import { Provider } from 'react-redux';
 
-const store = configureStore();
+import store from './store'; //Import the store
+import EventView from './src/components/eventView' //Import the component file
+//import FilterPicker from './src/components/filterPicker' //Import the component file
 
 export default class App extends Component {
     render() {
         return (
-            <Root store={store} />
+            <Provider store={store}>
+	            <EventView />
+            </Provider>
         );
     }
 }

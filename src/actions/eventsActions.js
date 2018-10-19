@@ -1,7 +1,7 @@
 import axios from "axios";
 import Constants from "../config/constants";
 
-export function xxxfetchEvents(firstDate, lastDate) {
+export function fetchEvents(firstDate, lastDate) {
   return function(dispatch) {
     dispatch({type: "FETCH_EVENTS"});
     

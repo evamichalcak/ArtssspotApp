@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { decode } from 'he';
 import { cleanText } from '../helpers';
 
-import { xxxfetchEvents } from "../actions/eventsActions"
+import { fetchEvents } from "../actions/eventsActions"
 //import { fetchUser } from "../actions/userActions"
 
 @connect((store) => {
@@ -29,7 +29,7 @@ import { xxxfetchEvents } from "../actions/eventsActions"
 export default class EventView extends Component {
 
   componentWillMount() {
-    this.props.dispatch(xxxfetchEvents(this.props.firstDate, this.props.lastDate));
+    this.props.dispatch(fetchEvents(this.props.firstDate, this.props.lastDate));
     console.log('dispateched from eventView');
   }
 

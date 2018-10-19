@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStackNavigator } from 'react-navigation';
-import Header from './Header';
-import HomeScreen from './HomeScreen';
-import CategoryScreen from './CategoryScreen';
+import ArtssspotApp from './ArtssspotApp';
+import configureStore from '../config/configureStore'
 
-const RootStack = createStackNavigator(
-  {
-    Home: {
-        screen: HomeScreen,
-    },
-    Category: {
-        screen: CategoryScreen,
-    },
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
+const store = configureStore();
 
-
-export default class Root extends Component {
-	render() {
-		return (
-			<Provider store={this.props.store}>
-		        <RootStack />
-		    </Provider>
-		);
-	} 
+const Root = ({ store }) => {
+    <Provider store={store}>
+        <ArtssspotApp />
+    </Provider>
 };
+
+export default Root;
