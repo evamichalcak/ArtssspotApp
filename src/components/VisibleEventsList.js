@@ -5,11 +5,17 @@ import EventsList from './EventsList';
 import { fetchEvents, toggleEvent } from '../actions';
 import { getVisibleEvents, getVisibilityFilter, getIsFetching, getErrorMessage } from '../reducers';
 import FetchError from './FetchError';
+import Constants from "../config/constants";
 
 class VisibleEventsList extends React.Component {
 
-  fetchData() {
-    console.log('fetchData');
+    fetchData() {
+    console.log('fetchdata in visibleeventslist: ', this.props.filter);
+    //let cat = Constants.CATS[this.props.filter].id;
+    //console.log('cat in visibleeventslist: ', cat);
+    //let params = Constants.CATS[this.props.filter].params;
+    //console.log('params in visibleeventslist: ', params);
+    //this.props.fetchEvents(cat, params, this.props.filter);
     this.props.fetchEvents(this.props.filter);
   }
 
@@ -19,10 +25,9 @@ class VisibleEventsList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.filter !== prevProps.filter) {
-      this.props.fetchEvents(this.props.filter);
+      this.fetchData();
     }
-    
-  }
+  } 
 
   render() {
     if (this.props.isFetching && !this.props.events.length) {
@@ -43,13 +48,15 @@ class VisibleEventsList extends React.Component {
 const mapStateToVisibleEventsListProps = (state, ownProps) => {
   const filter=ownProps.filter;
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-  let dataSource = ds.cloneWithRows(getVisibleEvents(state, filter));
+  let dataSource = ds.cloneWithRows(getVisibleEvents(state));
+  console.log('getVisibleEvents(state).length', getVisibleEvents(state).length);
+  console.log('dataSource.length', dataSource.length);
   return {
-    events: getVisibleEvents(state, filter),
+    events: getVisibleEvents(state),
     filter,
     dataSource,
-    isFetching: getIsFetching(state, filter),
-    errorMessage: getErrorMessage(state, filter)
+    isFetching: getIsFetching(state),
+    errorMessage: getErrorMessage(state)
   };
 };
 

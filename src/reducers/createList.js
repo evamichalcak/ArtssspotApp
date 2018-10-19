@@ -4,25 +4,29 @@ import { combineReducers } from 'redux';
 const createList = (filter) => {
 
   const ids = (state = [], action) => {
-    if (action.filter !== filter) {
-      return state;
-    }
+    // if (action.filter !== filter) {
+    //   return state;
+    // }
     switch (action.type) {
       case 'FETCH_EVENTS_SUCCESS':
-        if (action.filter === 'all') {
-          return action.response.result;
-        } else if (action.filter === 'home') {
-          let homearr = [
-            ...action.response.entities.eventCategories['100']['posts'],
-            ...action.response.entities.eventCategories['101']['posts'],
-            ...action.response.entities.eventCategories['102']['posts']
-            ]
-          return homearr;
-        } else {
-          return filter === action.filter ? 
-            action.response.entities.eventCategories[filter]['posts'] : 
-            state;
-        }
+        return action.response.result;
+        // if (action.filter === 'all') {
+        //   return action.response.result;
+        // }        
+        // if (action.filter === 'all') {
+        //   return action.response.result;
+        // } else if (action.filter === 'home') {
+        //   let homearr = [
+        //     ...action.response.entities.eventCategories['100']['posts'],
+        //     ...action.response.entities.eventCategories['101']['posts'],
+        //     ...action.response.entities.eventCategories['102']['posts']
+        //     ]
+        //   return homearr;
+        // } else {
+        //   return filter === action.filter ? 
+        //     action.response.entities.eventCategories[filter]['posts'] : 
+        //     state;
+        // }
       default:
         return state;
     }
@@ -30,9 +34,9 @@ const createList = (filter) => {
 
 
   const isFetching = (state = false, action) => {
-    if (action.filter !== filter) {
-      return state;
-    }
+    // if (action.filter !== filter) {
+    //   return state;
+    // }
     switch (action.type) {
       case 'FETCH_EVENTS_REQUEST':
         return true;
@@ -45,9 +49,9 @@ const createList = (filter) => {
   }
 
   const errorMessage = (state = null, action) => {
-    if (filter !== action.filter) {
-      return state;
-    }
+    // if (filter !== action.filter) {
+    //   return state;
+    // }
     switch (action.type) {
       case 'FETCH_EVENTS_FAILURE':
         return action.message;

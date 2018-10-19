@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { FlatList, ListView } from 'react-native';
 import Event from './Event';
 
 class EventsList extends React.Component {

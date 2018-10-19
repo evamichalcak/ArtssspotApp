@@ -23,6 +23,7 @@ export const toggleEvent = (filter) => {
 
 //thunk action
 export const fetchEvents = (filter) => (dispatch, getState) => {
+  console.log('inside fetchevents action');
   //we have already a api request running for this filter
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve();
@@ -33,7 +34,7 @@ export const fetchEvents = (filter) => (dispatch, getState) => {
       filter
     });
   //fetch from api
-  return api.fetchEvents3().then(
+  return api.fetchEvents(filter).then(
     response => {
       //console.log(normalize( response, schema.eventsListSchema));
       //announce fetching end

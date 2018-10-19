@@ -66,6 +66,7 @@ const getDateString = (offset) => {
 
 
 export const fetchEvents = ( categoryId, config = {}) => {
+  console.log('fetchEvents new: ', categoryId, config);
   // all calls have main category. Could be 'all' to ignore category
   // optional config object: startdate, enddate, overlap, exclude, orderby, order
   // paremeters to mandatory add or exclude second category: ?overlap=cat or ?exclude=cat
@@ -75,37 +76,76 @@ export const fetchEvents = ( categoryId, config = {}) => {
   // when the orderby parameter is used with _EventEndDate, response fields _EventStartDate and _EventEndDate are both set to _EventEndDate, 
   // so use eventStart and eventEnd instead!!!
   
-  console.log('fetchEventsNew');
-  // getting dates for API call
-  let firstDate = config.startdate || getDateString();
-  //lastDate = config.enddate || getDateString(Constants.DAY_OFFSET);
-  let lastDate = config.enddate || firstDate;
-
-  let paramString = '?';
-
-  if (config.overlap) {
-
+  //asign firstDate according to config and delete the property from config to not affect the for...in loop
+  let firstDate;
+  if (config.startdate) {
+     firstDate = config.startdate;
+     delete config.startdate;
+  } else {
+     firstDate = getDateString();
   }
-  if (config.exclude) {
 
+  //asign lastDate according to config and delete the property from config to not affect the for...in loop
+  let lastDate;
+  if (config.enddate) {
+     lastDate = config.enddate;
+     delete config.enddate;
+  } else {
+     lastDate = (config.soon)? getDateString(Constants.DAY_OFFSET) : firstDate;
   }
-  if (config.soon) {
 
+  // generate query parameter string form remaining config object
+  let paramString = "";
+  // testing config for empty object, if not empty, add '?' to paramstring
+  (Object.keys(config).length === 0 && config.constructor === Object)? paramString = '' : paramString = '?';
+  // adding params from config object
+  for (paramKey in config) {
+    if (paramString.length > 1) {
+      paramString += '&';
+    }
+    paramString += paramKey + '=' + config[paramKey]; 
   }
+
+
+  // if (config.overlap) {
+  //   if (paramString.length > 1) {
+  //     paramString += '&';
+  //   }
+  //   paramString += 'overlap=' + config.overlap; 
+  // }
+  // if (config.exclude) {
+  //   if (paramString.length > 1) {
+  //     paramString += '&';
+  //   }
+  //   paramString += 'exclude=' + config.exclude; 
+  // }
+  // if (config.soon) {
+  //   if (paramString.length > 1) {
+  //     paramString += '&';
+  //   }
+  //   paramString += 'soon=' + config.soon; 
+  // }
 
    // putting together API endpoint
-    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/cat/' + categoryId + paramSting;
-    //console.log('route: ' + route);
+    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate;
+    if (!isNaN(parseInt(categoryId))) {
+      route += '/cat/'+ categoryId;
+    }
+    route = route + '' + paramString;
+    console.log('route: ', route);
     
 
     return axios.get(route)
-    .then((response) => {
-    // if (Math.random() > 0.5) {
-    //   throw new Error('Boom!');
-    // }
+      .then((response) => {
+        // if (Math.random() > 0.5) {
+        //   throw new Error('Boom!');
+        // }
 
-    return response.data.posts;
+        console.log('fetchEventsNew');
+        return response.data.posts;
+      // getting dates for API call
 
+      });
 }
 
 
@@ -116,7 +156,7 @@ export const fetchEvents3 = (firstDate, lastDate) => {
     lastDate = lastDate || getDateString(Constants.DAY_OFFSET);
     
     // putting together API endpoint
-    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/';
+    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/cat/100';
     //console.log('route: ' + route);
     
 
