@@ -4,25 +4,36 @@ import { combineReducers } from 'redux';
 const createList = (filter) => {
 
   const ids = (state = [], action) => {
+    console.log('action filter in createList: ', action.filter);
     if (action.filter !== filter) {
       return state;
     }
     switch (action.type) {
       case 'FETCH_EVENTS_SUCCESS':
-        if (action.filter === 'all') {
-          return action.response.result;
-        } else if (action.filter === 'home') {
-          let homearr = [
-            ...action.response.entities.eventCategories['100']['posts'],
-            ...action.response.entities.eventCategories['101']['posts'],
-            ...action.response.entities.eventCategories['102']['posts']
-            ]
-          return homearr;
-        } else {
-          return filter === action.filter ? 
-            action.response.entities.eventCategories[filter]['posts'] : 
-            state;
-        }
+        return action.response.result;
+
+        // if (action.filter === 'all') {
+        //   return action.response.eventsListSchema;
+        // } else {
+        //   return filter === action.filter ? 
+        //     action.response.entities.eventCategories[filter]['posts'] : 
+        //     state;
+        // }
+
+      //   if (action.filter === 'all') {
+      //     return action.response.result;
+      //   } else if (action.filter === 'home') {
+      //     let homearr = [
+      //       ...action.response.entities.eventCategories['100']['posts'],
+      //       ...action.response.entities.eventCategories['101']['posts'],
+      //       ...action.response.entities.eventCategories['102']['posts']
+      //       ]
+      //     return homearr;
+      //   } else {
+      //     return filter === action.filter ? 
+      //       action.response.entities.eventCategories[filter]['posts'] : 
+      //       state;
+      //   }
       default:
         return state;
     }

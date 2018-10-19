@@ -18,27 +18,24 @@ export const toggleEvent = (filter) => {
   return {
     type: 'TOGGLE_EVENT',
     cat,
-    params, 
-    filter
+    params
   }
 }
 
 //thunk action
-export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {
+export const fetchEvents = (cat, params) => (dispatch, getState) => {
   //we have already a api request running for this filter
   if (getIsFetching(getState())) {
-    console.log('promise resolved...');
     return Promise.resolve();
   }
   //announce fetching start
   dispatch({
       type: 'FETCH_EVENTS_REQUEST',
       cat,
-      params, 
-      filter
+      params
     });
   //fetch from api
-  return api.fetchEvents(cat, params).then(
+  return api.fetchEvents('190', {'soon' : 'starting'}).then(
     response => {
       //console.log(normalize( response, schema.eventsListSchema));
       //announce fetching end

@@ -17,13 +17,12 @@ import { connect } from 'react-redux';
 import FilterLink from './FilterLink';
 import EventsList from './EventsList';
 import VisibleEventsList from './VisibleEventsList';
-import { createStackNavigator } from 'react-navigation';
 import Header from './Header';
 import Constants from "../config/constants";
 
 
 
-export default class ArtssspotApp extends React.Component {
+export default class CategoryScreen extends React.Component {
   static navigationOptions = {
     headerTitle: <Header />,
   };
@@ -31,7 +30,7 @@ export default class ArtssspotApp extends React.Component {
     return (
       <View style={styles.container}>
 
-        <VisibleEventsList filter={this.props.navigation.getParam('cat', 'home')} />
+        <VisibleEventsList filter={this.props.navigation.getParam('cat', 'all')} />
 
       </View>
     );
