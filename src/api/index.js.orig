@@ -157,7 +157,11 @@ export const fetchEvents3 = (firstDate, lastDate) => {
     lastDate = lastDate || getDateString(Constants.DAY_OFFSET);
     
     // putting together API endpoint
+<<<<<<< HEAD
+    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/cat/100';
+=======
     let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/cat/100/' ;
+>>>>>>> rewindbranch
     //console.log('route: ' + route);
     
 

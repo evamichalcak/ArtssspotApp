@@ -29,8 +29,13 @@ export const eventsListSchema = new schema.Array(event);
 // export const arrayOfEvents = arrayOf(event);
 
 
+<<<<<<< HEAD
+export const eventSchema = new schema.Entity('events');
+export const eventsListSchema = new schema.Array(eventSchema);
+=======
 
 
+>>>>>>> rewindbranch
 
 
 // export const categorySchema = new schema.Entity('eventCategories');

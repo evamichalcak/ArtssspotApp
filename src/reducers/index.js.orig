@@ -4,7 +4,7 @@ import event from './event';
 //import createList, * as fromList from './createList';
 import orderedList, * as fromList from './orderedList';
 import Constants from "../config/constants";
-
+import orderedList from './orderedList';
 
 let redObj = {};
 
@@ -23,8 +23,13 @@ const events = combineReducers({
 export default events;
 
 export const getVisibleEvents = (state) => {
+<<<<<<< HEAD
+  console.log('fromList.getIds(state.listByFilter).length', fromList.getIds(state.listByFilter).length)
+  const ids = fromList.getIds(state.listByFilter);
+=======
   const ids = fromList.getIds(state.listByFilter);
   //console.log(ids);
+>>>>>>> rewindbranch
   return ids.map(id => fromById.getEvent(state.byId, id));
 }
 

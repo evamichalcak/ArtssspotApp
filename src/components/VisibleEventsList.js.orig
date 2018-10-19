@@ -9,6 +9,16 @@ import Constants from "../config/constants";
 
 class VisibleEventsList extends React.Component {
 
+<<<<<<< HEAD
+    fetchData() {
+    console.log('fetchdata in visibleeventslist: ', this.props.filter);
+    //let cat = Constants.CATS[this.props.filter].id;
+    //console.log('cat in visibleeventslist: ', cat);
+    //let params = Constants.CATS[this.props.filter].params;
+    //console.log('params in visibleeventslist: ', params);
+    //this.props.fetchEvents(cat, params, this.props.filter);
+    this.props.fetchEvents(this.props.filter);
+=======
   fetchData() {
     console.log('fetchdata in visibleeventslist: ', this.props.filter);
     let cat = Constants.CATS[this.props.filter].id;
@@ -16,6 +26,7 @@ class VisibleEventsList extends React.Component {
     let params = Constants.CATS[this.props.filter].params;
     console.log('params in visibleeventslist: ', params);
     this.props.fetchEvents(cat, params, this.props.filter);
+>>>>>>> rewindbranch
   }
 
   componentDidMount() {
@@ -28,10 +39,16 @@ class VisibleEventsList extends React.Component {
       console.log('prev filter', prevProps.filter);
       console.log('new props filter', this.props.filter);
     if (this.props.filter !== prevProps.filter) {
+<<<<<<< HEAD
+      this.fetchData();
+    }
+  } 
+=======
       console.log('inside DidUpdate if');
       this.fetchData();
     }
   }
+>>>>>>> rewindbranch
 
   render() {
     if (this.props.isFetching && !this.props.events.length) {
@@ -53,8 +70,11 @@ const mapStateToVisibleEventsListProps = (state, ownProps) => {
   const filter=ownProps.filter;
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
   let dataSource = ds.cloneWithRows(getVisibleEvents(state));
+<<<<<<< HEAD
   console.log('getVisibleEvents(state).length', getVisibleEvents(state).length);
   console.log('dataSource.length', dataSource.length);
+=======
+>>>>>>> rewindbranch
   return {
     events: getVisibleEvents(state),
     filter,

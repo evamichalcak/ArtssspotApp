@@ -127,12 +127,8 @@ export const fetchEvents = ( categoryId, config = {}) => {
   // }
 
    // putting together API endpoint
-    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate;
-    if (!isNaN(parseInt(categoryId))) {
-      route += '/cat/'+ categoryId;
-    }
-    route = route + '' + paramString;
-    console.log('route: ', route);
+    let route = Constants.EVENTS_API_BASE + firstDate + '/' + lastDate + '/cat/' + categoryId + paramString;
+    console.log('route: ' + route);
     
 
     return axios.get(route)

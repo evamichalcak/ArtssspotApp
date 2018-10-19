@@ -1,6 +1,10 @@
 const byId = (state={}, action) => {
   if (action.response) {
+<<<<<<< HEAD
+    return action.response.entities.events;
+=======
     return action.response.entities.posts;
+>>>>>>> rewindbranch
   }
   return state; 
 };

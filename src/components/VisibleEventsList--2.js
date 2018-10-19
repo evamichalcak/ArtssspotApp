@@ -12,10 +12,8 @@ class VisibleEventsList extends React.Component {
   fetchData() {
     console.log('fetchdata in visibleeventslist: ', this.props.filter);
     let cat = Constants.CATS[this.props.filter].id;
-    console.log('cat in visibleeventslist: ', cat);
     let params = Constants.CATS[this.props.filter].params;
-    console.log('params in visibleeventslist: ', params);
-    this.props.fetchEvents(cat, params, this.props.filter);
+    this.props.fetchEvents(cat, params);
   }
 
   componentDidMount() {
@@ -24,13 +22,10 @@ class VisibleEventsList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-      console.log('before DidUpdate if');
-      console.log('prev filter', prevProps.filter);
-      console.log('new props filter', this.props.filter);
     if (this.props.filter !== prevProps.filter) {
-      console.log('inside DidUpdate if');
       this.fetchData();
     }
+    
   }
 
   render() {
@@ -52,15 +47,13 @@ class VisibleEventsList extends React.Component {
 const mapStateToVisibleEventsListProps = (state, ownProps) => {
   const filter=ownProps.filter;
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-  let dataSource = ds.cloneWithRows(getVisibleEvents(state));
-  console.log('getVisibleEvents(state).length', getVisibleEvents(state).length);
-  console.log('dataSource.length', dataSource.length);
+  let dataSource = ds.cloneWithRows(getVisibleEvents(state, filter));
   return {
-    events: getVisibleEvents(state),
+    events: getVisibleEvents(state, filter),
     filter,
     dataSource,
-    isFetching: getIsFetching(state),
-    errorMessage: getErrorMessage(state)
+    isFetching: getIsFetching(state, filter),
+    errorMessage: getErrorMessage(state, filter)
   };
 };
 

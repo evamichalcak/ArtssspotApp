@@ -27,33 +27,49 @@ const Constants = {
       id: '100',
       text: 'Los imperdibles',
       slug: 'los-imperdibles',
+<<<<<<< HEAD
+      params: {}
+=======
       params: {
         'order': 'DESC',
       }
+>>>>>>> rewindbranch
     }, //100
     'recommended': {
       id: '101',
       text: 'Los recomendados',
       slug: 'los-recomendados',
+<<<<<<< HEAD
+      params: {}
+=======
       params: {
         'order': 'DESC',
       }
+>>>>>>> rewindbranch
     }, //101
     'discovery':  {
       id: '102',
       text: 'Para descubrir',
       slug: 'para-descubrir',
+<<<<<<< HEAD
+      params: {}
+=======
       params: {
         'order': 'DESC',
       }
+>>>>>>> rewindbranch
     }, //102
     'activities': {
       id: '99',
       text: 'Actividades recomendadas',
       slug: 'actividades-recomendadas',
+<<<<<<< HEAD
+      params: {}
+=======
        params: { 
         'soon' : 'starting',
       }
+>>>>>>> rewindbranch
     }, //99
     'openings': {
       id: '190',
