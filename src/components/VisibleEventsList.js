@@ -59,7 +59,7 @@ const mapStateToVisibleEventsListProps = (state, ownProps) => {
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
   let dataSource = ds.cloneWithRows(getVisibleEvents(state));
   console.log('getVisibleEvents(state).length', getVisibleEvents(state).length);
-  console.log('dataSource.length', dataSource.length);
+  console.log('dataSource', dataSource);
   return {
     events: getVisibleEvents(state),
     filter,

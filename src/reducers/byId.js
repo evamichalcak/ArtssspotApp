@@ -1,6 +1,9 @@
 const byId = (state={}, action) => {
   if (action.response) {
-    return action.response.entities.posts;
+    return {
+    	...state,
+    	...action.response.entities.posts
+	};
   }
   return state; 
 };
