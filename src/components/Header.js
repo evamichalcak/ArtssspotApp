@@ -21,5 +21,5 @@ class Header extends React.Component {
     );
   }
 }
-//console.log('const filter: ' + Constants.CATS['Próximas inauguraciones']);
+
 export default withNavigation(Header);

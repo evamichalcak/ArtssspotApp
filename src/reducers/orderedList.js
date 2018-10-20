@@ -4,7 +4,6 @@ const orderedList = () => {
 
   const ids = (state=[], action) => {
 	if (action.response) {
-  	//console.log('---ides reducer----', typeof action.response);
 	  return action.response.result;
 	}
 	return state; 

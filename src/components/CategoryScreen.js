@@ -1,16 +1,3 @@
-// import React, { Component } from 'react';
-// import EventView from './EventView';
-
-// export default class ArtssspotApp extends Component {
-//     render() {
-//         return (
-//             <EventView />
-//         );
-//     }
-// }
-
-
-
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
