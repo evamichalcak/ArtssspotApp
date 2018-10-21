@@ -1,19 +1,19 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import Header from './Header';
 import FilterLink from './FilterLink';
-import CategoryMenu from './CategoryMenu';
 import Accordion from 'react-native-collapsible/Accordion';
 import Constants from "../config/constants";
-
+import { withNavigation } from 'react-navigation';
 
 
 const SECTIONS = [
   {
-    title: 'By category',
+    title: 'Menu',
   }
 ];
 
-class Header extends React.Component {
+class AccordionHeader extends React.Component {
 
   state = {
     activeSections: []
@@ -22,7 +22,9 @@ class Header extends React.Component {
   _renderHeader = section => {
     return (
       <View>
-        <Text>{section.title}</Text>
+        <Text>Artssspot</Text>
+        <Text>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Text>
+        <Text>Barcelona</Text>
       </View>
     );
   };
@@ -30,7 +32,7 @@ class Header extends React.Component {
   _renderContent = section => {
     return (
       <View>
-        <CategoryMenu />
+        <Header />
       </View>
     );
   };
@@ -41,12 +43,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <View>       
-        <FilterLink text={Constants.CATS['home'].text} navroute='Home' />
-        <FilterLink text={Constants.CATS['openings'].text} filter='openings' navroute='Category' />
-        <FilterLink text={Constants.CATS['unmissables'].text} filter='unmissables' navroute='Category' />
-        <FilterLink text={Constants.CATS['recommended'].text} filter='recommended' navroute='Category' />
-        <FilterLink text={Constants.CATS['activities'].text} filter='activities' navroute='Category' />
+      <View style={{marginTop: 20}}>
         <Accordion
           sections={SECTIONS}
           activeSections={this.state.activeSections}
@@ -59,4 +56,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withNavigation(AccordionHeader);

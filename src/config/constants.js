@@ -1,5 +1,5 @@
 const Constants = {
-  EVENTS_API_BASE: "https://artssspot.com/barcelona/wp-json/tribe_events/v2/sss_events/",
+  EVENTS_API_BASE: "https://www.artssspot.com/barcelona/en/wp-json/tribe_events/v2/sss_events/",
   DAY_OFFSET : 10,
   CATS: {
 
@@ -24,45 +24,93 @@ const Constants = {
       params: {}
     },
     'unmissables': {
-      id: '100',
-      text: 'Los imperdibles',
-      slug: 'los-imperdibles',
+      id: '147',
+      text: 'The unmissables',
+      slug: 'the-unmissables',
       params: {
         'order': 'DESC',
       }
-    }, //100
+    },
     'recommended': {
-      id: '101',
-      text: 'Los recomendados',
-      slug: 'los-recomendados',
+      id: '123',
+      text: 'The recommended',
+      slug: 'recommended',
       params: {
         'order': 'DESC',
       }
-    }, //101
+    },
     'discovery':  {
-      id: '102',
-      text: 'Para descubrir',
-      slug: 'para-descubrir',
+      id: '120',
+      text: 'To discover',
+      slug: 'to-discover',
       params: {
         'order': 'DESC',
       }
-    }, //102
+    },
     'activities': {
-      id: '99',
-      text: 'Actividades recomendadas',
-      slug: 'actividades-recomendadas',
+      id: '146',
+      text: 'Recommended activities',
+      slug: 'recommended-activities',
        params: { 
         'soon' : 'starting',
       }
-    }, //99
+    },
     'openings': {
-      id: '190',
-      text: 'Próximas inauguraciones',
-      slug: 'proximas-inauguraciones',
+      id: '188',
+      text: 'Upcoming openings',
+      slug: 'upcoming-openings',
       params: { 
         'soon' : 'starting',
       }
-    }, //190
+    },
+    'contemporary': {
+      id: '136',
+      text: 'Contemporary Art',
+      slug: 'contemporary-art',
+      params: { 
+         'order': 'DESC',
+      }
+    },
+    'design': {
+      id: '122',
+      text: 'Design',
+      slug: 'design',
+      params: { 
+         'order': 'DESC',
+      }
+    },
+    'photography': {
+      id: '143',
+      text: 'Photography',
+      slug: 'photography',
+      params: { 
+         'order': 'DESC',
+      }
+    },
+    'urban': {
+      id: '138',
+      text: 'Urban art',
+      slug: 'urban-art',
+      params: { 
+         'order': 'DESC',
+      }
+    },
+    'architecture': {
+      id: '133',
+      text: 'Architecture',
+      slug: 'architecture',
+      params: { 
+         'order': 'DESC',
+      }
+    },
+    'illustration': {
+      id: '139',
+      text: 'Illustration',
+      slug: 'illustration',
+      params: { 
+         'order': 'DESC',
+      }
+    },
   },
 }
 

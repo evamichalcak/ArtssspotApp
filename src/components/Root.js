@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStackNavigator } from 'react-navigation';
-import Header from './Header';
+import AccordionHeader from './AccordionHeader';
 import HomeScreen from './HomeScreen';
 import CategoryScreen from './CategoryScreen';
 
@@ -16,6 +16,13 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: {
+      header: props => <AccordionHeader />,
+      headerStyle: {
+        backgroundColor: "transparent"
+      }
+    },
+    animationEnabled: true
   }
 );
 

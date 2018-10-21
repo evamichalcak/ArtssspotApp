@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
-import Header from './Header';
+import AccordionHeader from './AccordionHeader';
 
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: <Header />,
+    headerTitle: <AccordionHeader />,
   };
   render() {
     return (

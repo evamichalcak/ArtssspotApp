@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import FilterLink from './FilterLink';
 import EventsList from './EventsList';
 import VisibleEventsList from './VisibleEventsList';
-import Header from './Header';
+import AccordionHeader from './AccordionHeader';
 import Constants from "../config/constants";
 
 
 
 export default class CategoryScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: <Header />,
+    headerTitle: <AccordionHeader />,
   };
   render() {
     return (
