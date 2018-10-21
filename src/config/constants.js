@@ -49,7 +49,7 @@ const Constants = {
     },
     'activities': {
       id: '146',
-      text: 'Recommended activities',
+      text: 'Talks and workshops',
       slug: 'recommended-activities',
        params: { 
         'soon' : 'starting',
@@ -109,6 +109,51 @@ const Constants = {
       slug: 'illustration',
       params: { 
          'order': 'DESC',
+      }
+    },
+    'museums': {
+      id: '144',
+      text: 'Museums and foundations',
+      slug: 'museums-and-foundations',
+      params: { 
+         'order': 'DESC',
+         'exclude': '124' //activity
+      }
+    },
+    'artcenters': {
+      id: '141',
+      text: 'Art Centers',
+      slug: 'art-centers',
+      params: { 
+         'order': 'DESC',
+         'exclude': '124' //activity
+      }
+    },
+    'galeries': {
+      id: '113',
+      text: 'Galleries',
+      slug: 'galeries',
+      params: { 
+         'order': 'DESC',
+         'exclude': '124' //activity
+      }
+    },
+    'spaces': {
+      id: '119',
+      text: 'Alternative spaces',
+      slug: 'alternative-spaces',
+      params: { 
+         'order': 'DESC',
+         'exclude': '124' //activity
+      }
+    },
+    'festivals': {
+      id: '142',
+      text: 'Fairs and festivals',
+      slug: 'fairs-and-festivals',
+      params: { 
+         'order': 'DESC',
+         'exclude': '124' //activity
       }
     },
   },
