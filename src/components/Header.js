@@ -20,6 +20,21 @@ const SECTIONS = [
 
 class Header extends React.Component {
 
+    // componentDidUpdate(prevProps) {
+  //   console.log('------didupdate---isFetching', this.props.isFetching);
+  //    if (prevProps.isFetching !== this.props.isFetching) {
+  //     activeSections = [];
+  //   }
+  //   this.setState({ activeSections });
+  // }
+
+  // componentWillUpdate(prevProps) {
+  //   console.log('------didupdate---isFetching', this.props.isFetching);
+  //   if (this.props.isFetching) {
+  //      this._updateSections([]);
+  //   }
+  // }
+
   state = {
     activeSections: []
   };
@@ -63,5 +78,13 @@ class Header extends React.Component {
     );
   }
 }
+
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     isFetching: getIsFetching(state)
+//   };
+// }
+
+// export default connect(mapStateToProps)(Header);
 
 export default Header;

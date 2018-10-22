@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { getIsFetching } from '../reducers';
+import { connect } from 'react-redux';
 import Header from './Header';
 import FilterLink from './FilterLink';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -14,6 +16,15 @@ const SECTIONS = [
 ];
 
 class AccordionHeader extends React.Component {
+
+  componentWillUpdate() {
+    if (this.props.isFetching) {
+      this.setState({
+        ...this.state,
+        activeSections: []
+      });
+    }
+  }
 
   state = {
     activeSections: []
@@ -42,11 +53,12 @@ class AccordionHeader extends React.Component {
   };
 
   render() {
+    console.log('---render---isFetching', this.props.isFetching);
     return (
       <View style={{marginTop: 20}}>
         <Accordion
           sections={SECTIONS}
-          activeSections={this.state.activeSections}
+          activeSections={(this.props.isFetching)? [] : this.state.activeSections}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
           onChange={this._updateSections}
@@ -56,4 +68,10 @@ class AccordionHeader extends React.Component {
   }
 }
 
-export default withNavigation(AccordionHeader);
+const mapStateToProps = (state) => {
+  return {
+    isFetching: getIsFetching(state)
+  };
+}
+
+export default withNavigation(connect(mapStateToProps)(AccordionHeader));
