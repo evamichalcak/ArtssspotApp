@@ -1,22 +1,9 @@
 -API: remove futures from categories
 
 
--category pages call with category api
--all page call with date api
 -home page calls 3 categories in 3 containers
--createList just creates lists, from a filter over ById, does nothing more
--state gets saved before createList gets called
-
--createList should receive state and action and read filter from visibilityFilter in state
-
--REMOVE CASE 'categories' in ids function of createList
-
-
-
-API:
--all calls have main category. Could be 'all' or null
--optional dates: only start date, startdate & enddate
--paremeters to add or exclude second category: ?include=catlist / ?exclude=catlist
+-go back to creatList, create a list for each filter
+-attention to spread copy state! new events should not get attached at the end but respect order of ids...
 
 
 

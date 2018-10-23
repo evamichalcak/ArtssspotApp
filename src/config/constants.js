@@ -11,17 +11,41 @@ const Constants = {
   // when the orderby parameter is used with _EventEndDate, response fields _EventStartDate and _EventEndDate are both set to _EventEndDate, 
   // so use eventStart and eventEnd instead!!!
 
+    'all' : {
+      id: 'all',
+      text: 'All',
+      slug: '',
+      params: {}
+    },
     'home': {
       id: 'home',
       text: 'Home',
       slug: '',
       params: {}
     },
-    'all' : {
-      id: 'all',
-      text: 'All',
-      slug: '',
-      params: {}
+    'home1': {
+      id: '242',
+      text: 'The unmissables',
+      slug: 'home-1',
+      params: {
+        'order': 'DESC',
+      }
+    },
+    'home2': {
+      id: '243',
+      text: 'The recommended',
+      slug: 'home-2',
+      params: {
+        'order': 'DESC',
+      }
+    },
+    'home3': {
+      id: '244',
+      text: 'Discover something new',
+      slug: 'home-3',
+      params: {
+        'order': 'DESC',
+      }
     },
     'unmissables': {
       id: '147',
@@ -41,7 +65,7 @@ const Constants = {
     },
     'discovery':  {
       id: '120',
-      text: 'To discover',
+      text: 'Discover something new',
       slug: 'to-discover',
       params: {
         'order': 'DESC',

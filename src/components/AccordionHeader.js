@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import { getIsFetching } from '../reducers';
 import { connect } from 'react-redux';
 import Header from './Header';
-import FilterLink from './FilterLink';
 import Accordion from 'react-native-collapsible/Accordion';
 import Constants from "../config/constants";
 import { withNavigation } from 'react-navigation';
@@ -53,7 +52,6 @@ class AccordionHeader extends React.Component {
   };
 
   render() {
-    console.log('---render---isFetching', this.props.isFetching);
     return (
       <View style={{marginTop: 20}}>
         <Accordion

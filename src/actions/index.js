@@ -6,7 +6,6 @@ import * as schema from './schema';
 let nextEventId = 0;
 
 export const toggleEvent = (filter) => {
-  console.log('visibility filter in toggleEvent: ' + filter);
   return {
     type: 'TOGGLE_EVENT',
     cat,
@@ -19,7 +18,6 @@ export const toggleEvent = (filter) => {
 export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {
   //we have already a api request running for this filter
   if (getIsFetching(getState())) {
-    console.log('promise resolved...');
     return Promise.resolve();
   }
   //announce fetching start
@@ -38,7 +36,8 @@ export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {
         type: 'FETCH_EVENTS_SUCCESS',
         response: normalize( response, schema.eventsListSchema),
         cat,
-        params
+        params, 
+        filter
       });
     },
     error => {
@@ -46,7 +45,8 @@ export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {
       dispatch({
         type: 'FETCH_EVENTS_FAILURE',
         cat,
-        params,
+        params, 
+        filter,
         message: error.message || 'Something went wrong'
       });
     }
