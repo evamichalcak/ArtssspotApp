@@ -17,7 +17,7 @@ export default class HomeScreen extends React.Component {
         </View>
         <Text>Talks and workshops</Text>
         <View style={styles.subcontainer}>
-          <VisibleEventsList filter='activities' style={styles.subcontainer} />
+          <VisibleEventsList filter='activities' textOnly={true} style={styles.subcontainer} />
         </View>
       </View>
     );

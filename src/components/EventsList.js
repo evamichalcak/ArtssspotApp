@@ -19,6 +19,7 @@ class EventsList extends React.Component {
             address={rowData.eventVenueAddress}
             summary={rowData.eventExcerpt}
             onClick={() => {this.props.onEventClick(rowData.id)}} 
+            textOnly = {this.props.textOnly}
           />
         }
       />
