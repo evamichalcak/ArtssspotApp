@@ -2,34 +2,50 @@ import { combineReducers } from 'redux';
 
 const orderedList = () => {
 
-  const ids = (state=[], action) => {
+  const ids = (state={}, action) => {
 	if (action.response) {
+    console.log(action.filter, state[action.filter]);
     console.log('****action filter in action with response:', action.filter)
-	  return action.response.result;
+	  return {
+      ...state,
+      [action.filter]: action.response.result,
+    };
 	}
 	return state; 
   }
 
 
-  const isFetching = (state = false, action) => {
+  const isFetching = (state = {}, action) => {
     switch (action.type) {
       case 'FETCH_EVENTS_REQUEST':
-        return true;
+        return {
+          ...state,
+          [action.filter]: true,
+        };
       case 'FETCH_EVENTS_SUCCESS':
       case 'FETCH_EVENTS_FAILURE':
-        return false;
+        return {
+          ...state,
+          [action.filter]: false,
+        };
       default:
         return state;
     }
   }
 
-  const errorMessage = (state = null, action) => {
+  const errorMessage = (state = {}, action) => {
     switch (action.type) {
       case 'FETCH_EVENTS_FAILURE':
-        return action.message;
+        return {
+          ...state,
+          [action.filter]: action.message,
+        };
       case 'FETCH_EVENTS_SUCCESS':
       case 'FETCH_EVENTS_REQUEST':
-        return null;
+        return {
+          ...state,
+          [action.filter]: null,
+        };
       default:
         return state;
     }
@@ -45,6 +61,13 @@ const orderedList = () => {
 
 export default orderedList;
 
-export const getIds = (state) => state.ids;
-export const getIsFetching = (state) => state.isFetching;
-export const getErrorMessage = (state) => state.errorMessage;
+export const getIds = (state, filter) => state.ids[filter] || [];
+export const getIsFetching = (state, filter) => state.isFetching[filter] || false;
+export const getIsFetchingAny = (state) => { 
+  for (filter in state.isFetching) {
+     if (state.isFetching[filter] === true) {
+      return true;
+     }
+  } return false
+};
+export const getErrorMessage = (state, filter) => state.errorMessage[filter] || null;

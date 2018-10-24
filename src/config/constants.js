@@ -180,6 +180,17 @@ const Constants = {
          'exclude': '124' //activity
       }
     },
+
+    ////////////empty category test//////
+    // 'test': {
+    //   id: '700',
+    //   text: 'Test',
+    //   slug: 'test',
+    //   params: { 
+    //      'order': 'DESC',
+    //   }
+    // },
+    
   },
 }
 

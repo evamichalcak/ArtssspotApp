@@ -51,6 +51,9 @@ class VisibleEventsList extends React.Component {
         />
       );
     }
+    if (!this.props.isFetching && !this.props.events.length) {
+      return <Text>Sorry, no events available at this time</Text>;
+    }
     return <EventsList {...this.props} />;
   }
 }
@@ -58,13 +61,13 @@ class VisibleEventsList extends React.Component {
 const mapStateToVisibleEventsListProps = (state, ownProps) => {
   const filter=ownProps.filter;
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-  let dataSource = ds.cloneWithRows(getVisibleEvents(state));
+  let dataSource = ds.cloneWithRows(getVisibleEvents(state, filter));
   return {
-    events: getVisibleEvents(state),
+    events: getVisibleEvents(state, filter),
     filter,
     dataSource,
-    isFetching: getIsFetching(state),
-    errorMessage: getErrorMessage(state)
+    isFetching: getIsFetching(state, filter),
+    errorMessage: getErrorMessage(state, filter)
   };
 };
 

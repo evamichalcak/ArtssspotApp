@@ -62,7 +62,7 @@ class Header extends React.Component {
   render() {
     return (
       <View>       
-        <FilterLink text={Constants.CATS['home'].text} filter='home' navroute='Home' />
+        <FilterLink text={Constants.CATS['home'].text} filter='home' navroute='Home' />       
         <FilterLink text={Constants.CATS['openings'].text} filter='openings' navroute='Category' />
         <FilterLink text={Constants.CATS['unmissables'].text} filter='unmissables' navroute='Category' />
         <FilterLink text={Constants.CATS['recommended'].text} filter='recommended' navroute='Category' />

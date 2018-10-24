@@ -17,7 +17,7 @@ export const toggleEvent = (filter) => {
 //thunk action
 export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {
   //we have already a api request running for this filter
-  if (getIsFetching(getState())) {
+  if (getIsFetching(getState(), filter)) {
     return Promise.resolve();
   }
   //announce fetching start

@@ -16,13 +16,17 @@ const events = combineReducers({
 
 export default events;
 
-export const getVisibleEvents = (state) => {
-  const ids = fromList.getIds(state.listByFilter);
+export const getVisibleEvents = (state, filter) => {
+  const ids = fromList.getIds(state.listByFilter, filter);
+  console.log(ids);
   return ids.map(id => fromById.getEvent(state.byId, id));
 }
 
-export const getIsFetching = (state) => 
-  fromList.getIsFetching(state.listByFilter);
+export const getIsFetching = (state, filter) => 
+  fromList.getIsFetching(state.listByFilter, filter);
 
-export const getErrorMessage = (state) => 
-  fromList.getErrorMessage(state.listByFilter);
+export const getIsFetchingAny = (state) => 
+  fromList.getIsFetchingAny(state.listByFilter);  
+
+export const getErrorMessage = (state, filter) => 
+  fromList.getErrorMessage(state.listByFilter, filter);

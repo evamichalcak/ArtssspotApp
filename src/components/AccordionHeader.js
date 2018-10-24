@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { getIsFetching } from '../reducers';
+import { getIsFetching, getIsFetchingAny } from '../reducers';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -66,9 +66,9 @@ class AccordionHeader extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, filter) => {
   return {
-    isFetching: getIsFetching(state)
+    isFetching: getIsFetchingAny(state)
   };
 }
 
