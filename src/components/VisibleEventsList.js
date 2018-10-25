@@ -18,13 +18,10 @@ class VisibleEventsList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
       this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate old:', prevProps.filter);
-    console.log('componentDidUpdate new:', this.props.filter);
     if (this.props.filter !== prevProps.filter) {
       this.fetchData();
     }

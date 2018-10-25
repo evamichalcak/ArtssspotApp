@@ -4,8 +4,6 @@ const orderedList = () => {
 
   const ids = (state={}, action) => {
 	if (action.response) {
-    console.log(action.filter, state[action.filter]);
-    console.log('****action filter in action with response:', action.filter)
 	  return {
       ...state,
       [action.filter]: action.response.result,

@@ -1,13 +1,16 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import VisibleEventsList from './VisibleEventsList';
 
 export default class CategoryScreen extends React.Component {
+  filter=this.props.navigation.getParam('cat', 'all');
   render() {
     return (
       <View style={styles.container}>
 
-        <VisibleEventsList filter={this.props.navigation.getParam('cat', 'all')} />
+        <VisibleEventsList filter={this.filter} />
+        <Text>----</Text>
+        <VisibleEventsList filter='design' />
 
       </View>
     );
