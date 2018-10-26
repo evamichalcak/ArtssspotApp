@@ -10,11 +10,17 @@ const SECTIONS = [
   }
 ];
 
-
 class Event extends React.Component {
+
+  shouldComponentUpdate(nextProps) {
+    //console.log('sssssssssssssssshouldComponentUpdate',nextProps.open !== this.props.open);
+      //return this.props.id === (nextProps.categoryIndex || this.props.categoryIndex);
+      return nextProps.open !== this.props.open;
+    }
+
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: "column" }}>
+      <View style={{ flex: 1, flexDirection: "column" }}> 
           <View style={{ flex: 1, flexDirection: "column", alignItems: "flex-start", justifyContent: "center", marginBottom: 0 }}>
               {!(this.props.textOnly === true) &&
                 <Image source={{uri:this.props.image}} style={{width: 193, height: 110}} />
@@ -31,17 +37,17 @@ class Event extends React.Component {
               onPress={this.props.onClick}>
               <View style={{ alignItems: "center", justifyContent: "center", marginBottom: 5 }}>
 
-                  {this.props.categoryIndex == this.props.id &&
+                  {this.props.open &&
                       <View>
                           <Text>{cleanText(this.props.summary)}</Text>
                           <Text> Less</Text>
-                          {console.log('categoryindex in less', this.props.categoryIndex)}
+                          {console.log('categoryIndex in less', this.props.open)}
                       </View>
                   }
-                  {this.props.categoryIndex != this.props.id &&
+                  {!this.props.open &&
                       <View>
                           <Text> More</Text>
-                          {console.log('categoryindex in more', this.props.categoryIndex)}
+                          {console.log('categoryIndex in more', this.props.open)}
                       </View>
                   }
               </View>

@@ -9,8 +9,6 @@ export default class CategoryScreen extends React.Component {
       <View style={styles.container}>
 
         <VisibleEventsList filter={this.filter} />
-        <Text>----</Text>
-        <VisibleEventsList filter='design' />
 
       </View>
     );
