@@ -6,6 +6,13 @@
 -attention to spread copy state! new events should not get attached at the end but respect order of ids...
 
 
+-toggle event needs to read global variable of openid, reset the open one if necessary, open the new one and set the global variable to new id or false.
+-openEvent needs access to byId list, so should be a combined reducer from byId and openEvent
+-maybe move toggle action into main event reducer that has access to both, eventopen and byId
+
+
+
+
 
 APP features:
 -------------

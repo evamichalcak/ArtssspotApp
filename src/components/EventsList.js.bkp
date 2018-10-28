@@ -12,8 +12,7 @@ class EventsList extends React.Component {
     ...this.state,
     //stateName: this.props.filter,
     showSubcategory: false,
-    categoryIndex: false,
-    toToggle: false
+    categoryIndex: false
   };
 
   eventRefs = [];
@@ -35,21 +34,6 @@ class EventsList extends React.Component {
       }
 
   }
-
-  // toggleEvent(eventId, callback) {
-  //   console.log('eventId', eventId);
-  //   console.log('callback', callback);
-  //   if (this.state.toToggle !== false) {
-  //     if (eventId === this.state.categoryIndex) {
-  //       this.setState({ toToggle: false }); 
-  //     } else {
-  //       this.state.toToggle();
-  //       this.setState({ toToggle: callback }); 
-  //     }
-  //   }
-  //   this.setState({ categoryIndex: eventId }); 
-  //   callback();
-  // }
 
   // _toggleExpanded(id) {
   //   console.log('------', id);
@@ -74,13 +58,11 @@ class EventsList extends React.Component {
             address={rowData.eventVenueAddress}
             summary={rowData.eventExcerpt}
             id={rowData.id}
-            onClick={() => this.props.onEventClick(rowData.id)}
-            open={rowData.open || false} 
-            //open={this.props.getEventOpen()}
+            onClick={() => this.updateIndex(rowData.id)} 
             //categoryIndex={this.state.categoryIndex}
-            //open = {this.state.categoryIndex == rowData.id && this.state.showSubcategory}
+            open = {this.state.categoryIndex == rowData.id && this.state.showSubcategory}
             textOnly = {this.props.textOnly}
-          ><Text>{rowData.eventExcerpt}</Text><Text>---{rowData.open}---</Text></Event>
+          />
         </View>
         }
       />

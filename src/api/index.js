@@ -20,7 +20,8 @@ const getDateString = (offset) => {
 
 
 export const fetchEvents = ( categoryId, config = {}) => {
-    console.log('fetchEvents new: ', categoryId, config);
+    //console.log('fetchEvents new: ', categoryId, config);
+    
     // all calls have main category. Could be 'all' to ignore category
     // optional config object: startdate, enddate, overlap, exclude, orderby, order
     // paremeters to mandatory add or exclude second category: ?overlap=cat or ?exclude=cat
@@ -75,7 +76,6 @@ export const fetchEvents = ( categoryId, config = {}) => {
         //   throw new Error('Boom!');
         // }
 
-        console.log('fetchEventsNew');
         return response.data.posts;
       // getting dates for API call
 
