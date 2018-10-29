@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
-import ExpandView from './ExpandView';
+import OpenURLButton from './OpenURLButton';
 import { decode } from 'he';
 import { cleanText, cleanDate } from '../helpers';
 
@@ -21,23 +21,10 @@ class Event extends React.Component {
               <Text>{decode(this.props.address)}</Text>
 
           </View>
-          <TouchableHighlight
-              onPress={this.props.onClick}>
-              <View style={{ alignItems: "center", justifyContent: "center", marginBottom: 5 }}>
-
-                  {this.props.open &&
-                      <ExpandView>
-                            <Text>{cleanText(this.props.summary)}</Text>
-                          <Text> Less</Text>
-                      </ExpandView>
-                  }
-                  {!this.props.open &&
-                      <View>
-                          <Text> More</Text>
-                      </View>
-                  }
-              </View>
-          </TouchableHighlight>
+          <OpenURLButton
+              url={this.props.link}>
+                          <Text>Read more</Text>
+          </OpenURLButton>
       </View>
     );
   }
