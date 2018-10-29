@@ -1,48 +1,7 @@
 import * as api from "../api";
-import { getIsFetching, getVisibleEvents, getOpenEvent } from "../reducers";
+import { getIsFetching, getVisibleEvents } from "../reducers";
 import { normalize } from 'normalizr';
 import * as schema from './schema';
-
-let nextEventId = 0;
-
-//thunk action
-export const toggleEvent = (id) => (dispatch, getState) => {
-  let previous = getOpenEvent(getState());
-  // console.log('id at start', id);
-  // console.log('previou at start', previous);
-  if (!previous) {
-  // console.log('id in first if', id);
-  // console.log('previou in first if', previous);
-    dispatch({
-        type: 'TOGGLE_EVENT',
-        id
-      });
-  } else {
-    
-  // console.log('id in else', id);
-  // console.log('previous in else', previous);
-    if (previous !== id) {
-  // console.log('id in second if', id);
-  // console.log('previou in second if', previous);
-      dispatch({
-        type: 'TOGGLE_EVENT',
-        id,
-        previous
-      });
-      dispatch({
-        type: 'TOGGLE_EVENT',
-        id
-      });
-    } else { 
-  // console.log('id in second else', id);
-  // console.log('previou in second else', previous);
-      dispatch({
-        type: 'TOGGLE_EVENT',
-        id
-      });
-    }
-  }
-}
 
 //thunk action
 export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {

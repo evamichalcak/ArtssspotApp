@@ -70,7 +70,7 @@ const mapStateToVisibleEventsListProps = (state, ownProps) => {
 
 VisibleEventsList = connect(
   mapStateToVisibleEventsListProps,
-  { onEventClick: toggleEvent, fetchEvents} //, getEventOpen }
+  {fetchEvents} //, getEventOpen }
 )(VisibleEventsList);
 
 export default VisibleEventsList;
