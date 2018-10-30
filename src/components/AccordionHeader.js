@@ -1,12 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, Image, View, StyleSheet } from 'react-native';
 import { getIsFetching, getIsFetchingAny } from '../reducers';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Accordion from 'react-native-collapsible/Accordion';
 import Constants from "../config/constants";
 import { withNavigation } from 'react-navigation';
-
 
 const SECTIONS = [
   {
@@ -31,17 +30,21 @@ class AccordionHeader extends React.Component {
 
   _renderHeader = section => {
     return (
-      <View>
-        <Text>Artssspot</Text>
-        <Text>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Text>
-        <Text>Barcelona</Text>
+      <View style={styles.HeaderContainer}>
+        <View style={styles.categoryContainer}>
+          <Image source={require('../../assets/img/dot_white.svg')} style={{width: 20, height: 20}}/>
+        </View>
+        <Text style={styles.category}>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Text>
+        <View style={styles.cityContainer}>
+          <Text style={styles.city}>Barcelona</Text>
+        </View>
       </View>
     );
   };
 
   _renderContent = section => {
     return (
-      <View>
+      <View style={{paddingBottom: 10, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderBottomColor: 'blue'}}>
         <Header />
       </View>
     );
@@ -53,7 +56,7 @@ class AccordionHeader extends React.Component {
 
   render() {
     return (
-      <View style={{marginTop: 20}}>
+      <View style={{paddingBottom: 10, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderBottomColor: 'blue'}}>
         <Accordion
           sections={SECTIONS}
           activeSections={(this.props.isFetching)? [] : this.state.activeSections}
@@ -71,5 +74,56 @@ const mapStateToProps = (state, filter) => {
     isFetching: getIsFetchingAny(state)
   };
 }
+
+const styles = StyleSheet.create({
+  HeaderContainer: {
+    backgroundColor: '#f9ccb7',
+    flexDirection: 'row',
+    minHeight: 60,
+  },
+  categoryContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 35,
+    paddingBottom: 15,
+    width: '65%',
+  },
+  category: {
+    color: '#f30a02',
+  },
+  cityContainer: {
+    backgroundColor: '#f30a02',
+    flex: 0,
+    justifyContent: 'center',
+    paddingTop: 35,
+    paddingBottom: 15,
+    width: '35%',
+  },
+  city: {
+    color: 'white',
+    textAlign: 'center',
+  },
+});
+
+
+
+
+
+// const styles = StyleSheet.create({
+//   headerContainer: {
+//     flex: 1,
+//     flexDirection: 'row',
+//     //backgroundColor: '#f9ccb7',
+//   },
+//   page: {
+//     //color: 'white',
+//   },
+//   cityContainer: {
+//     backgroundColor: '#f30a02',
+//   }
+//   city: {
+//     //color: 'white',
+//   },
+// });
 
 export default withNavigation(connect(mapStateToProps)(AccordionHeader));
