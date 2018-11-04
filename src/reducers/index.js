@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import byId, * as fromById from './byId';
 import orderedList, * as fromList from './orderedList';
+//import fontHandler, * as fromFont  from './fontHandler';
 import Constants from "../config/constants";
 
 
@@ -10,7 +11,8 @@ const listByFilter = orderedList();
 
 const events = combineReducers({
   byId,
-  listByFilter
+  listByFilter,
+  //fontHandler,
 });
 
 export default events;
@@ -29,3 +31,8 @@ export const getIsFetchingAny = (state) =>
 
 export const getErrorMessage = (state, filter) => 
   fromList.getErrorMessage(state.listByFilter, filter);
+
+
+// export const getFontReady = (state) => {
+//   fromFont.getFontReady(state.fontHandler);
+// }

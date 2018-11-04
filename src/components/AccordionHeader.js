@@ -1,11 +1,18 @@
 import React from 'react';
-import { Text, Image, View, StyleSheet } from 'react-native';
+import { Text, Image, View, StyleSheet, Platform } from 'react-native';
 import { getIsFetching, getIsFetchingAny } from '../reducers';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Accordion from 'react-native-collapsible/Accordion';
 import Constants from "../config/constants";
 import { withNavigation } from 'react-navigation';
+import * as Typo from './Typography';
+
+// import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+// import icoMoonConfig from '../../assets/fonts/Artssspot.json';
+// const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'Artssspot');
+
+import IconExample from './IconExample';
 
 const SECTIONS = [
   {
@@ -32,9 +39,9 @@ class AccordionHeader extends React.Component {
     return (
       <View style={styles.HeaderContainer}>
         <View style={styles.categoryContainer}>
-          <Image source={require('../../assets/img/dot_white.svg')} style={{width: 20, height: 20}}/>
+          <IconExample />
+          <Text style={styles.category}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
         </View>
-        <Text style={styles.category}>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Text>
         <View style={styles.cityContainer}>
           <Text style={styles.city}>Barcelona</Text>
         </View>
@@ -44,7 +51,7 @@ class AccordionHeader extends React.Component {
 
   _renderContent = section => {
     return (
-      <View style={{paddingBottom: 10, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderBottomColor: 'blue'}}>
+      <View style={styles.BodyContainer}>
         <Header />
       </View>
     );
@@ -56,8 +63,8 @@ class AccordionHeader extends React.Component {
 
   render() {
     return (
-      <View style={{paddingBottom: 10, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderBottomColor: 'blue'}}>
-        <Accordion
+      <View style={{backgroundColor: 'rgba(255, 255, 255, 0.3)', paddingBottom: 10}}>
+        <Accordion 
           sections={SECTIONS}
           activeSections={(this.props.isFetching)? [] : this.state.activeSections}
           renderHeader={this._renderHeader}
@@ -76,20 +83,35 @@ const mapStateToProps = (state, filter) => {
 }
 
 const styles = StyleSheet.create({
+  BodyContainer: {
+    backgroundColor: '#f30a02',
+  },
   HeaderContainer: {
     backgroundColor: '#f9ccb7',
     flexDirection: 'row',
     minHeight: 60,
   },
   categoryContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: 35,
-    paddingBottom: 15,
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 7,
+    paddingLeft: 7,
+    paddingRight: 15,
+    paddingTop: 30,
     width: '65%',
   },
   category: {
     color: '#f30a02',
+    flex: 1,
+    fontFamily: 'sans-serif-condensed',
+    marginTop: 7,
+    textAlign: 'right',
+  },
+  logo: {
+    color: '#f30a02',
+    flex: 0,
+    marginRight: 4,
   },
   cityContainer: {
     backgroundColor: '#f30a02',
@@ -102,6 +124,8 @@ const styles = StyleSheet.create({
   city: {
     color: 'white',
     textAlign: 'center',
+    fontFamily:  Platform.OS === 'ios' ? 'Avenir Next Condensed' : 'sans-serif-condensed',
+    fontSize: 20,
   },
 });
 

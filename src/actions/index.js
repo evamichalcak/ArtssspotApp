@@ -3,6 +3,13 @@ import { getIsFetching, getVisibleEvents } from "../reducers";
 import { normalize } from 'normalizr';
 import * as schema from './schema';
 
+// export const fontLoader = () => (dispatch, getState) => {
+//   console.log('--------action fontLoader');
+//   dispatch({
+//     type: 'FONT_LOADED',
+//    });
+// }
+
 //thunk action
 export const fetchEvents = (cat, params, filter) => (dispatch, getState) => {
   //we have already a api request running for this filter

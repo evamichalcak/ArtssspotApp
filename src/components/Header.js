@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet, Platform } from 'react-native';
 import FilterLink from './FilterLink';
 import CategoryMenu from './CategoryMenu';
 import SpaceMenu from './SpaceMenu';
@@ -62,11 +62,11 @@ class Header extends React.Component {
   render() {
     return (
       <View>       
-        <FilterLink text={Constants.CATS['home'].text} filter='home' navroute='Home' />       
-        <FilterLink text={Constants.CATS['openings'].text} filter='openings' navroute='Category' />
-        <FilterLink text={Constants.CATS['unmissables'].text} filter='unmissables' navroute='Category' />
-        <FilterLink text={Constants.CATS['recommended'].text} filter='recommended' navroute='Category' />
-        <FilterLink text={Constants.CATS['activities'].text} filter='activities' navroute='Category' />
+        <FilterLink text={Constants.CATS['home'].text} filter='home' navroute='Home' style={styles.item} />       
+        <FilterLink text={Constants.CATS['openings'].text} filter='openings' navroute='Category' style={styles.item} />
+        <FilterLink text={Constants.CATS['unmissables'].text} filter='unmissables' navroute='Category' style={styles.item} />
+        <FilterLink text={Constants.CATS['recommended'].text} filter='recommended' navroute='Category' style={styles.item} />
+        <FilterLink text={Constants.CATS['activities'].text} filter='activities' navroute='Category' style={styles.item} />
         <Accordion
           sections={SECTIONS}
           activeSections={this.state.activeSections}
@@ -88,3 +88,15 @@ class Header extends React.Component {
 // export default connect(mapStateToProps)(Header);
 
 export default Header;
+
+const styles = StyleSheet.create({
+  item: {
+    color: 'white',
+    fontFamily:  Platform.OS === 'ios' ? 'Avenir Next Condensed' : 'sans-serif-condensed',
+    fontSize: 18,
+    marginLeft: 10,
+    marginRight: 10,
+    borderTopWidth: 0.5,
+    borderTopColor: 'white',
+  },
+});

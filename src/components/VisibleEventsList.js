@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, Text } from 'react-native';
 import EventsList from './EventsList';
-import { fetchEvents, toggleEvent } from '../actions';
+import { fetchEvents } from '../actions';
 import { getVisibleEvents, getIsFetching, getErrorMessage, toggleUniqueEvent, getEventOpen } from '../reducers';
 import FetchError from './FetchError';
 import Constants from "../config/constants";

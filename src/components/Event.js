@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import OpenURLButton from './OpenURLButton';
 import { decode } from 'he';
 import { cleanText, cleanDate } from '../helpers';
+import * as Typo from './Typography';
 
 class Event extends React.Component {
 
@@ -11,14 +12,17 @@ class Event extends React.Component {
       <View style={{ flex: 1, flexDirection: "column" }}> 
           <View style={{ flex: 1, flexDirection: "column", alignItems: "flex-start", justifyContent: "center", marginBottom: 0 }}>
               {!(this.props.textOnly === true) &&
-                <Image source={{uri:this.props.image}} style={{width: 193, height: 110}} />
+                <Image source={{uri:this.props.image}} style={{width: 193, height: 110}} /> 
+              } 
+              {!(this.props.textOnly === true) &&
+                <Typo.H1>{decode(this.props.title)}</Typo.H1>
+              } 
+              {(this.props.textOnly === true) &&
+                <Typo.Strong>{decode(this.props.title)}</Typo.Strong>
               }
-              <Text style={{ fontSize: 16 }}>
-                  {decode(this.props.title)}
-              </Text>
-              <Text>{cleanDate(this.props.start)} - {cleanDate(this.props.end)}</Text> 
-              <Text>{decode(this.props.venue)}</Text>
-              <Text>{decode(this.props.address)}</Text>
+              <Typo.Small>{cleanDate(this.props.start)} - {cleanDate(this.props.end)}</Typo.Small> 
+              <Typo.Small>{decode(this.props.venue)}</Typo.Small>
+              <Typo.Small>{decode(this.props.address)}</Typo.Small>
 
           </View>
           <OpenURLButton
