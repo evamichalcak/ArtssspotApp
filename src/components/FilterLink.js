@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Link from './Link';
 import { withNavigation } from 'react-navigation';
+import styles from "./styles/header";
 
 const mapStateToLinkProps = (state, ownProps) => {
   return {
-    active: ownProps.filter === ownProps.navigation.getParam('cat', 'home')
+    active: ownProps.filter === ownProps.navigation.getParam('cat', 'home'),
+    itemstyle: ownProps.style,
   };
 };
 const mapDispatchToLinkPorps = (dispatch, ownProps) => {

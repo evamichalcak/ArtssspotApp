@@ -39,7 +39,7 @@ class AccordionHeader extends React.Component {
     return (
       <View style={styles.HeaderContainer}>
         <View style={styles.categoryContainer}>
-          <IconExample />
+          <IconExample style={styles.logo} />
           <Text style={styles.category}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
         </View>
         <View style={styles.cityContainer}>
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     color: '#f30a02',
     flex: 0,
     marginRight: 4,
+    marginLeft: 2,
   },
   cityContainer: {
     backgroundColor: '#f30a02',

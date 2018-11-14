@@ -6,7 +6,7 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'Artssspot');
 export default class IconExample extends React.Component {
   render() {
     return (
-      <Icon name="dot-outlined-m" size={40} color="red" />
+      <Icon name="dot-outlined-m" size={40} style={this.props.style} />
     );
   }
 }
