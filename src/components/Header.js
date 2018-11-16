@@ -6,6 +6,8 @@ import SpaceMenu from './SpaceMenu';
 import Accordion from 'react-native-collapsible/Accordion';
 import Constants from "../config/constants";
 import styles from "./styles/header";
+import IconPlusO from './IconPlusO';
+import IconMinusO from './IconMinusO';
 
 const SECTIONS = [
   {
@@ -40,10 +42,23 @@ class Header extends React.Component {
     activeSections: []
   };
 
-  _renderHeader = section => {
+  _renderHeader = (section, index, isActive, sections) => {
+    if (isActive) {
+      return (
+        <View style={[styles.item, styles.collapsible]}>
+          <IconMinusO style={[styles.text, styles.icon]} />
+          <Text style={[styles.text, styles.section]}>
+               {section.title}
+          </Text>
+        </View>
+      );
+    }
     return (
-      <View style={styles.item}>
-        <Text style={styles.text}>{section.title}</Text>
+      <View style={[styles.item, styles.collapsible]}>
+        <IconPlusO style={[styles.text, styles.icon]} />
+        <Text style={[styles.text, styles.section]}>
+             {section.title}
+        </Text>
       </View>
     );
   };
@@ -63,11 +78,11 @@ class Header extends React.Component {
   render() {
     return (
       <View style={styles.container}>     
-        <FilterLink filter='home' navroute='Home' style={styles.firstitem}><Text style={styles.text}>{Constants.CATS['home'].text}</Text></FilterLink>       
-        <FilterLink filter='openings' navroute='Category' style={styles.item}><Text style={styles.text}>{Constants.CATS['openings'].text}</Text></FilterLink>          
-        <FilterLink filter='unmissables' navroute='Category' style={styles.item}><Text style={styles.text}>{Constants.CATS['unmissables'].text}</Text></FilterLink> 
-        <FilterLink filter='recommended' navroute='Category' style={styles.item}><Text style={styles.text}>{Constants.CATS['recommended'].text}</Text></FilterLink>  
-        <FilterLink filter='activities' navroute='Category' style={styles.item}><Text style={styles.text}>{Constants.CATS['activities'].text}</Text></FilterLink>  
+        <FilterLink filter='home' navroute='Home' style={styles.firstitem} underlayColor={'#E90901'}><Text style={styles.text}>{Constants.CATS['home'].text}</Text></FilterLink>       
+        <FilterLink filter='openings' navroute='Category' style={styles.item} underlayColor={'#E90901'}><Text style={styles.text}>{Constants.CATS['openings'].text}</Text></FilterLink>          
+        <FilterLink filter='unmissables' navroute='Category' style={styles.item} underlayColor={'#E90901'}><Text style={styles.text}>{Constants.CATS['unmissables'].text}</Text></FilterLink> 
+        <FilterLink filter='recommended' navroute='Category' style={styles.item} underlayColor={'#E90901'}><Text style={styles.text}>{Constants.CATS['recommended'].text}</Text></FilterLink>  
+        <FilterLink filter='activities' navroute='Category' style={styles.item} underlayColor={'#E90901'}><Text style={styles.text}>{Constants.CATS['activities'].text}</Text></FilterLink>  
         <Accordion
           sections={SECTIONS}
           activeSections={this.state.activeSections}

@@ -20,12 +20,6 @@ const RootStack = createStackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       header: props => <AccordionHeader />,
-      // headerStyle: {
-      //   backgroundColor: 'transparent',
-      //   backfaceVisibility: 'hidden',
-      //   opacity: 0,
-      //   paddingBottom: 40
-      // }
     },
     animationEnabled: true
   }

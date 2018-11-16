@@ -30,7 +30,7 @@ class VisibleEventsList extends React.Component {
 
   render() {
     if (this.props.isFetching && !this.props.events.length) {
-      return <Text>Loading...</Text>;
+      return <Text style={{textAlign: 'center'}}>Loading...</Text>;
     }
     if (this.props.isFetching && this.loadingData) {
       return (

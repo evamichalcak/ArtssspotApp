@@ -6,8 +6,8 @@ import styles from "./styles/header";
 
 const mapStateToLinkProps = (state, ownProps) => {
   return {
+    ...ownProps,
     active: ownProps.filter === ownProps.navigation.getParam('cat', 'home'),
-    itemstyle: ownProps.style,
   };
 };
 const mapDispatchToLinkPorps = (dispatch, ownProps) => {

@@ -7,12 +7,8 @@ import Accordion from 'react-native-collapsible/Accordion';
 import Constants from "../config/constants";
 import { withNavigation } from 'react-navigation';
 import * as Typo from './Typography';
-
-// import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-// import icoMoonConfig from '../../assets/fonts/Artssspot.json';
-// const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'Artssspot');
-
-import IconExample from './IconExample';
+import IconLogo from './IconLogo';
+import IconArrowDown from './IconArrowDown';
 
 const SECTIONS = [
   {
@@ -35,12 +31,13 @@ class AccordionHeader extends React.Component {
     activeSections: []
   };
 
-  _renderHeader = section => {
+  _renderHeader = (section, index, isActive, sections) => {
     return (
       <View style={styles.HeaderContainer}>
-        <View style={styles.categoryContainer}>
-          <IconExample style={styles.logo} />
-          <Text style={styles.category}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
+        <View style={(isActive ? styles.categoryContainerOpen : styles.categoryContainer)}>
+          <IconLogo style={isActive ? styles.logoOpen : styles.logo} />
+          <Text style={styles.category} numberOfLines={1} ellipsizeMode={'tail'}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
+          <IconArrowDown style={styles.categoryicon} />
         </View>
         <View style={styles.cityContainer}>
           <Text style={styles.city}>Barcelona</Text>
@@ -63,7 +60,7 @@ class AccordionHeader extends React.Component {
 
   render() {
     return (
-      <View style={{backgroundColor: 'rgba(255, 255, 255, 0.3)', paddingBottom: 10}}>
+      <View style={styles.headerShadow}>
         <Accordion 
           sections={SECTIONS}
           activeSections={(this.props.isFetching)? [] : this.state.activeSections}
@@ -91,27 +88,55 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     minHeight: 60,
   },
+  headerShadow: {
+    shadowColor: '#fff',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 0,
+  },
   categoryContainer: {
-    flex: 0,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: 7,
     paddingLeft: 7,
     paddingRight: 15,
     paddingTop: 30,
-    width: '65%',
+  },
+  categoryContainerOpen: {
+    backgroundColor: '#f30a02',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 7,
+    paddingLeft: 7,
+    paddingRight: 15,
+    paddingTop: 30,
   },
   category: {
     color: '#f30a02',
     flex: 1,
     fontFamily: 'sans-serif-condensed',
     marginTop: 7,
+  },
+  categoryicon: {
+    color: '#f30a02',
+    flex: 0,
+    fontSize: 20,
+    marginLeft: 4,
+    marginTop: 11,
     textAlign: 'right',
   },
   logo: {
     color: '#f30a02',
     flex: 0,
-    marginRight: 4,
+    marginRight: 10,
+    marginLeft: 2,
+  },
+  logoOpen: {
+    color: '#fff',
+    flex: 0,
+    marginRight: 10,
     marginLeft: 2,
   },
   cityContainer: {
@@ -120,7 +145,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 35,
     paddingBottom: 15,
-    width: '35%',
+    minWidth: '30%',
   },
   city: {
     color: 'white',

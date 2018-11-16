@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, Dimensions } from 'react-native';
 import OpenURLButton from './OpenURLButton';
 import { decode } from 'he';
 import { cleanText, cleanDate } from '../helpers';
@@ -12,22 +12,22 @@ class Event extends React.Component {
       <View style={{ flex: 1, flexDirection: "column" }}> 
           <View style={{ flex: 1, flexDirection: "column", alignItems: "flex-start", justifyContent: "center", marginBottom: 0 }}>
               {!(this.props.textOnly === true) &&
-                <Image source={{uri:this.props.image}} style={{width: 193, height: 110}} /> 
+                <Image source={{uri:this.props.image}} style={styles.image} /> 
               } 
               {!(this.props.textOnly === true) &&
-                <Typo.H1>{decode(this.props.title)}</Typo.H1>
+                <Typo.H1 style={styles.title}>{decode(this.props.title)}</Typo.H1>
               } 
               {(this.props.textOnly === true) &&
-                <Typo.Strong>{decode(this.props.title)}</Typo.Strong>
+                <Typo.H4 style={styles.title}>{decode(this.props.title)}</Typo.H4>
               }
-              <Typo.Small>{cleanDate(this.props.start)} - {cleanDate(this.props.end)}</Typo.Small> 
-              <Typo.Small>{decode(this.props.venue)}</Typo.Small>
-              <Typo.Small>{decode(this.props.address)}</Typo.Small>
+              <Typo.P style={styles.info}>{cleanDate(this.props.start)} - {cleanDate(this.props.end)}</Typo.P> 
+              <Typo.Strong>{decode(this.props.venue)}</Typo.Strong>
+              <Typo.P style={styles.info}>{decode(this.props.address)}</Typo.P>
 
           </View>
           <OpenURLButton
-              url={this.props.link}>
-                          <Text>Read more</Text>
+              url={this.props.link} style={styles.button} underlayColor={'#5d09ab'}>
+                          <Typo.P style={styles.buttonText}>Read more</Typo.P>
           </OpenURLButton>
       </View>
     );
@@ -35,33 +35,32 @@ class Event extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  descriptionClosed: {
-    height: 0
-  },
   container   : {
       height: 0,
       backgroundColor: '#fff',
       margin:10,
 
   },
-  titleContainer : {
-      flexDirection: 'row'
+  button: {
+    backgroundColor: '#7210d0',
+    borderRadius: 2,
+    padding: 8,
   },
-  title       : {
-      flex    : 1,
-      padding : 10,
-      color   :'#2a2f43',
-      fontWeight:'bold'
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
   },
-  button      : {
-
+  image: {
+    width: Dimensions.get('window').width,
+    height: 180,
+    borderRadius: 2,
+    marginBottom: 20,
   },
-  buttonImage : {
-      fontSize   : 30
+  title: {
+    marginBottom: 7,
   },
-  body        : {
-      padding     : 10,
-      paddingTop  : 0,
+  info: {
+    marginBottom: 7,
   }
 });
 

@@ -13,7 +13,7 @@ class OpenURLButton extends React.Component {
   };
   render() {
     return (
-      <TouchableOpacity onPress={this.handleClick}>
+      <TouchableOpacity {...this.props} onPress={this.handleClick} >
          {this.props.children}
       </TouchableOpacity>
     );

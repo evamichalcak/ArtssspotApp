@@ -5,13 +5,13 @@ export default class Link extends React.Component {
   render() {
     if  (this.props.active) {
       return ( 
-        <View style={this.props.itemstyle}>
+        <View {...this.props}>
           <Text style={{fontWeight: 'bold'}}>{this.props.children}</Text>
         </View>
       );
     }
     return (
-      <TouchableHighlight onPress={() => {this.props.onClick()}} style={this.props.itemstyle}  underlayColor={'#E90901'}>
+      <TouchableHighlight {...this.props} onPress={() => {this.props.onClick();}}>
         {this.props.children}
       </TouchableHighlight>
     );
