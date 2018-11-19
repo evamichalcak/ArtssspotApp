@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, View, ScrollView, StyleSheet, Platform, Dimensions} from 'react-native';
+import { Text, Image, View, ScrollView, Animated, StyleSheet, Platform, Dimensions} from 'react-native';
 import { getIsFetching, getIsFetchingAny } from '../reducers';
 import { connect } from 'react-redux';
 import Header from './Header';
@@ -29,18 +29,48 @@ class AccordionHeader extends React.Component {
   }
 
   state = { 
-    screenHeight: 0,
+    //screenHeight: 0,
     activeSections: [],
+    headerColorAni: new Animated.Value(0),
+    logoColorAni: new Animated.Value(0),
   };
 
   _renderHeader = (section, index, isActive, sections) => {
+    // return (
+    //   <View style={styles.HeaderContainer}>
+    //     <View style={(isActive ? styles.categoryContainerOpen : styles.categoryContainer)}>
+    //       <IconLogo style={isActive ? styles.logoOpen : styles.logo} />
+    //       <Text style={styles.category} numberOfLines={1} ellipsizeMode={'tail'}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
+    //       <IconArrowDown style={styles.categoryicon} />
+    //     </View>
+    //     <View style={styles.cityContainer}>
+    //       <Text style={styles.city}>Barcelona</Text>
+    //     </View>
+    //   </View>
+    // );
+
+    let { headerColorAni, logoColorAni } = this.state;
+    const interpolateBackgroudColor = this.state.headerColorAni.interpolate({
+      inputRange: [0, 150],
+      outputRange: ['rgb(249,204,183)', 'rgb(243,10,2)']
+    })
+    const interpolateColor = this.state.logoColorAni.interpolate({
+      inputRange: [0, 150],
+      outputRange: ['rgb(243,10,2)', 'rgb(255,255,255)']
+    })
+    const animatedStyleHeader = {
+      backgroundColor: interpolateBackgroudColor,
+    }
+    const animatedStyleLogo = {
+      color: interpolateColor,
+    }
     return (
       <View style={styles.HeaderContainer}>
-        <View style={(isActive ? styles.categoryContainerOpen : styles.categoryContainer)}>
-          <IconLogo style={isActive ? styles.logoOpen : styles.logo} />
+        <Animated.View style={[styles.categoryContainer, animatedStyleHeader]}>
+          <Animated.Text style={[styles.logo, animatedStyleLogo]}><IconLogo /></Animated.Text>
           <Text style={styles.category} numberOfLines={1} ellipsizeMode={'tail'}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
           <IconArrowDown style={styles.categoryicon} />
-        </View>
+        </Animated.View>
         <View style={styles.cityContainer}>
           <Text style={styles.city}>Barcelona</Text>
         </View>
@@ -50,35 +80,53 @@ class AccordionHeader extends React.Component {
 
   _renderContent = section => {
     return (
-      <ScrollView style={styles.BodyContainer} contentContainerStyle={styles.scroll} onContentSizeChange={this._onContentSizeChange}>
+      <ScrollView style={styles.BodyContainer} contentContainerStyle={styles.scroll}>
         <Header />
       </ScrollView>
     );
   };
 
   _updateSections = activeSections => {
+
+    console.log(activeSections.length);
+    let animateTo = (activeSections.length > 0)? 150 : 0;
+
+    Animated.timing(                  // Animate over time
+      this.state.headerColorAni,            // The animated value to drive
+      {
+        toValue: animateTo,                   // Animate to opacity: 1 (opaque)
+        duration: 600,              // Make it take a while
+      }
+    ).start();
+    Animated.timing(                  // Animate over time
+      this.state.logoColorAni,            // The animated value to drive
+      {
+        toValue: animateTo,                   // Animate to opacity: 1 (opaque)
+        duration: 600,              // Make it take a while
+      }
+    ).start();
     this.setState({ activeSections });
   };
 
-  _onContentSizeChange = (contentWidth, contentHeight) => {
+  // _onContentSizeChange = (contentWidth, contentHeight) => {
     
-    // Save the content height in state
-    if (this.state.screenHeight != contentHeight) {
-        console.log('should change:', contentHeight, this.state.screenHeight);
-      //this.setState({ screenHeight: contentHeight });
-      // this.setState({
-      //   ...this.state,
-      //   screenHeight: contentHeight
-      // });
-    }
-    console.log('onContentSizeChange');
+  //   // Save the content height in state
+  //   if (this.state.screenHeight != contentHeight) {
+  //       console.log('should change:', contentHeight, this.state.screenHeight);
+  //     //this.setState({ screenHeight: contentHeight });
+  //     // this.setState({
+  //     //   ...this.state,
+  //     //   screenHeight: contentHeight
+  //     // });
+  //   }
+  //   console.log('onContentSizeChange');
     
-    // this.styles.BodyContainer = { 
-    //   backgroundColor: '#f30a02',
-    //   flexGrow: 1, 
-    //   minHeight: contentHeight 
-    // };
-  };
+  //   // this.styles.BodyContainer = { 
+  //   //   backgroundColor: '#f30a02',
+  //   //   flexGrow: 1, 
+  //   //   minHeight: contentHeight 
+  //   // };
+  // };
 
   render() {
     return (
@@ -89,6 +137,7 @@ class AccordionHeader extends React.Component {
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
           onChange={this._updateSections}
+          underlayColor={'#660c00'}
         />
       </View>
     );
@@ -156,17 +205,17 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   logo: {
-    color: '#f30a02',
+    //color: '#f30a02',
     flex: 0,
     marginRight: 10,
     marginLeft: 2,
   },
-  logoOpen: {
-    color: '#fff',
-    flex: 0,
-    marginRight: 10,
-    marginLeft: 2,
-  },
+  // logoOpen: {
+  //   color: '#fff',
+  //   flex: 0,
+  //   marginRight: 10,
+  //   marginLeft: 2,
+  // },
   cityContainer: {
     backgroundColor: '#f30a02',
     flex: 0,

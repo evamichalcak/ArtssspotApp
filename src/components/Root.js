@@ -55,11 +55,10 @@ export default class Root extends Component {
       <Provider store={this.props.store}>
         {
           this.state.fontLoaded ? (
-        
             <RootStack />
-          ) : <Text>
-              Loading
-            </Text>
+          ) : <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f30a02'}}><Text style={{color: '#fff', fontSize: 14}}>
+              Loading...
+            </Text></View>
         }
 
             
