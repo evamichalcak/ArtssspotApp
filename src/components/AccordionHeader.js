@@ -29,25 +29,12 @@ class AccordionHeader extends React.Component {
   }
 
   state = { 
-    //screenHeight: 0,
     activeSections: [],
     headerColorAni: new Animated.Value(0),
     logoColorAni: new Animated.Value(0),
   };
 
   _renderHeader = (section, index, isActive, sections) => {
-    // return (
-    //   <View style={styles.HeaderContainer}>
-    //     <View style={(isActive ? styles.categoryContainerOpen : styles.categoryContainer)}>
-    //       <IconLogo style={isActive ? styles.logoOpen : styles.logo} />
-    //       <Text style={styles.category} numberOfLines={1} ellipsizeMode={'tail'}><Typo.P>{Constants.CATS[this.props.navigation.getParam('cat', 'home')].text}</Typo.P></Text>
-    //       <IconArrowDown style={styles.categoryicon} />
-    //     </View>
-    //     <View style={styles.cityContainer}>
-    //       <Text style={styles.city}>Barcelona</Text>
-    //     </View>
-    //   </View>
-    // );
 
     let { headerColorAni, logoColorAni } = this.state;
     const interpolateBackgroudColor = this.state.headerColorAni.interpolate({
@@ -87,46 +74,26 @@ class AccordionHeader extends React.Component {
   };
 
   _updateSections = activeSections => {
-
-    console.log(activeSections.length);
+    
     let animateTo = (activeSections.length > 0)? 150 : 0;
 
-    Animated.timing(                  // Animate over time
-      this.state.headerColorAni,            // The animated value to drive
+    Animated.timing(                  
+      this.state.headerColorAni,           
       {
-        toValue: animateTo,                   // Animate to opacity: 1 (opaque)
-        duration: 600,              // Make it take a while
+        toValue: animateTo,                  
+        duration: 600,              
       }
     ).start();
-    Animated.timing(                  // Animate over time
-      this.state.logoColorAni,            // The animated value to drive
+    Animated.timing(                  
+      this.state.logoColorAni,          
       {
-        toValue: animateTo,                   // Animate to opacity: 1 (opaque)
-        duration: 600,              // Make it take a while
+        toValue: animateTo,          
+        duration: 600,              
       }
     ).start();
     this.setState({ activeSections });
   };
 
-  // _onContentSizeChange = (contentWidth, contentHeight) => {
-    
-  //   // Save the content height in state
-  //   if (this.state.screenHeight != contentHeight) {
-  //       console.log('should change:', contentHeight, this.state.screenHeight);
-  //     //this.setState({ screenHeight: contentHeight });
-  //     // this.setState({
-  //     //   ...this.state,
-  //     //   screenHeight: contentHeight
-  //     // });
-  //   }
-  //   console.log('onContentSizeChange');
-    
-  //   // this.styles.BodyContainer = { 
-  //   //   backgroundColor: '#f30a02',
-  //   //   flexGrow: 1, 
-  //   //   minHeight: contentHeight 
-  //   // };
-  // };
 
   render() {
     return (
@@ -153,7 +120,6 @@ const mapStateToProps = (state, filter) => {
 const styles = StyleSheet.create({
   BodyContainer: {
     backgroundColor: '#f30a02',
-    //flex: 1,
     flexGrow: 1,
     minHeight: (Dimensions.get('window').height - 77),
   },
@@ -162,15 +128,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     minHeight: 60,
   },
-  // scroll: {
-  //   flexGrow: 1,
-  // },
-  // headerShadow: {
-  //   shadowColor: '#fff',
-  //   shadowOffset: { width: 0, height: 5 },
-  //   shadowOpacity: 0.5,
-  //   shadowRadius: 0,
-  // },
   categoryContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -205,17 +162,10 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   logo: {
-    //color: '#f30a02',
     flex: 0,
     marginRight: 10,
     marginLeft: 2,
   },
-  // logoOpen: {
-  //   color: '#fff',
-  //   flex: 0,
-  //   marginRight: 10,
-  //   marginLeft: 2,
-  // },
   cityContainer: {
     backgroundColor: '#f30a02',
     flex: 0,
@@ -232,25 +182,5 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-
-
-// const styles = StyleSheet.create({
-//   headerContainer: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     //backgroundColor: '#f9ccb7',
-//   },
-//   page: {
-//     //color: 'white',
-//   },
-//   cityContainer: {
-//     backgroundColor: '#f30a02',
-//   }
-//   city: {
-//     //color: 'white',
-//   },
-// });
 
 export default withNavigation(connect(mapStateToProps)(AccordionHeader));

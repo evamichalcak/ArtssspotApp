@@ -7,7 +7,6 @@ import * as Typo from './Typography';
 export default class VenueScreen extends React.Component {
   filter=this.props.navigation.getParam('cat', 'all');
   render() {
-    console.log('filter: ', this.filter);
     return (
       <ScrollView style={styles.container} >
         <Typo.H3 style={styles.header}>Exhibitions</Typo.H3>

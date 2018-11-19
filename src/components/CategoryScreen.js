@@ -7,9 +7,7 @@ export default class CategoryScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
         <VisibleEventsList filter={this.filter} />
-
       </View>
     );
   }

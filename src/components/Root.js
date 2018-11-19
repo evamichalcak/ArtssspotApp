@@ -24,11 +24,6 @@ const RootStack = createStackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       header: props => <AccordionHeader />,
-      // headerStyle: {
-      //   backgroundColor: 'transparent',
-      //   backfaceVisibility: 'hidden',
-      //   elevation: 10,
-      // },
     },
     animationEnabled: true
   }
@@ -59,11 +54,8 @@ export default class Root extends Component {
           ) : <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f30a02'}}><Text style={{color: '#fff', fontSize: 14}}>
               Loading...
             </Text></View>
-        }
-
-            
+        } 
       </Provider>
-
     );
   } 
 };

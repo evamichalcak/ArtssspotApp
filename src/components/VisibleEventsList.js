@@ -13,7 +13,6 @@ class VisibleEventsList extends React.Component {
   loadingData = true;
 
   fetchData() {
-    console.log(this.props.filter);
     let cat = Constants.CATS[this.props.filter].id;
     let params = Constants.CATS[this.props.filter].params;
     this.props.fetchEvents(cat, params, this.props.filter);

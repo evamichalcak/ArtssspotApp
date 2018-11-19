@@ -67,7 +67,7 @@ export const fetchEvents = ( categoryId, config = {}) => {
       route += '/cat/'+ categoryId;
     }
     route = route + '' + paramString;
-    console.log('route: ', route);
+    //console.log('route: ', route);
     
 
     return axios.get(route)
