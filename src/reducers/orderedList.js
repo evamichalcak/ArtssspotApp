@@ -12,7 +12,6 @@ const orderedList = () => {
 	return state; 
   }
 
-
   const isFetching = (state = {}, action) => {
     switch (action.type) {
       case 'FETCH_EVENTS_REQUEST':

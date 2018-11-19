@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 import AccordionHeader from './AccordionHeader';
 import HomeScreen from './HomeScreen';
 import CategoryScreen from './CategoryScreen';
+import VenueScreen from './VenueScreen';
 import { Font } from 'expo';
 
 const RootStack = createStackNavigator(
@@ -15,11 +16,19 @@ const RootStack = createStackNavigator(
     Category: {
         screen: CategoryScreen,
     },
+    Venue: {
+        screen: VenueScreen,
+    },
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
       header: props => <AccordionHeader />,
+      // headerStyle: {
+      //   backgroundColor: 'transparent',
+      //   backfaceVisibility: 'hidden',
+      //   elevation: 10,
+      // },
     },
     animationEnabled: true
   }

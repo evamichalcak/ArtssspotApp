@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, View, StyleSheet, Platform } from 'react-native';
+import { Text, Image, View, ScrollView, StyleSheet, Platform, Dimensions} from 'react-native';
 import { getIsFetching, getIsFetchingAny } from '../reducers';
 import { connect } from 'react-redux';
 import Header from './Header';
@@ -18,6 +18,7 @@ const SECTIONS = [
 
 class AccordionHeader extends React.Component {
 
+
   componentWillUpdate() {
     if (this.props.isFetching) {
       this.setState({
@@ -27,8 +28,9 @@ class AccordionHeader extends React.Component {
     }
   }
 
-  state = {
-    activeSections: []
+  state = { 
+    screenHeight: 0,
+    activeSections: [],
   };
 
   _renderHeader = (section, index, isActive, sections) => {
@@ -48,14 +50,34 @@ class AccordionHeader extends React.Component {
 
   _renderContent = section => {
     return (
-      <View style={styles.BodyContainer}>
+      <ScrollView style={styles.BodyContainer} contentContainerStyle={styles.scroll} onContentSizeChange={this._onContentSizeChange}>
         <Header />
-      </View>
+      </ScrollView>
     );
   };
 
   _updateSections = activeSections => {
     this.setState({ activeSections });
+  };
+
+  _onContentSizeChange = (contentWidth, contentHeight) => {
+    
+    // Save the content height in state
+    if (this.state.screenHeight != contentHeight) {
+        console.log('should change:', contentHeight, this.state.screenHeight);
+      //this.setState({ screenHeight: contentHeight });
+      // this.setState({
+      //   ...this.state,
+      //   screenHeight: contentHeight
+      // });
+    }
+    console.log('onContentSizeChange');
+    
+    // this.styles.BodyContainer = { 
+    //   backgroundColor: '#f30a02',
+    //   flexGrow: 1, 
+    //   minHeight: contentHeight 
+    // };
   };
 
   render() {
@@ -82,18 +104,24 @@ const mapStateToProps = (state, filter) => {
 const styles = StyleSheet.create({
   BodyContainer: {
     backgroundColor: '#f30a02',
+    //flex: 1,
+    flexGrow: 1,
+    minHeight: (Dimensions.get('window').height - 77),
   },
   HeaderContainer: {
     backgroundColor: '#f9ccb7',
     flexDirection: 'row',
     minHeight: 60,
   },
-  headerShadow: {
-    shadowColor: '#fff',
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.5,
-    shadowRadius: 0,
-  },
+  // scroll: {
+  //   flexGrow: 1,
+  // },
+  // headerShadow: {
+  //   shadowColor: '#fff',
+  //   shadowOffset: { width: 0, height: 5 },
+  //   shadowOpacity: 0.5,
+  //   shadowRadius: 0,
+  // },
   categoryContainer: {
     flex: 1,
     flexDirection: 'row',

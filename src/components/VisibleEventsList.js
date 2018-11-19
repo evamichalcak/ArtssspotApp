@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, Text } from 'react-native';
 import EventsList from './EventsList';
+import { Small } from './Typography';
 import { fetchEvents } from '../actions';
 import { getVisibleEvents, getIsFetching, getErrorMessage, toggleUniqueEvent, getEventOpen } from '../reducers';
 import FetchError from './FetchError';
@@ -12,6 +13,7 @@ class VisibleEventsList extends React.Component {
   loadingData = true;
 
   fetchData() {
+    console.log(this.props.filter);
     let cat = Constants.CATS[this.props.filter].id;
     let params = Constants.CATS[this.props.filter].params;
     this.props.fetchEvents(cat, params, this.props.filter);
@@ -35,7 +37,7 @@ class VisibleEventsList extends React.Component {
     if (this.props.isFetching && this.loadingData) {
       return (
         <View>
-          <Text>Loading...</Text>
+          <Small style={{marginBottom: 10, textAlign: 'center'}}>Loading...</Small>
           <EventsList {...this.props} />
         </View>
       );
@@ -49,7 +51,7 @@ class VisibleEventsList extends React.Component {
       );
     }
     if (!this.props.isFetching && !this.props.events.length) {
-      return <Text>Sorry, no events available at this time</Text>;
+      return <Small style={{marginBottom: 10, textAlign: 'center'}}>No events available at this time</Small>;
     }
     return <EventsList {...this.props} />;
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   firstitem: {
@@ -54,7 +54,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   submenu: {
+  	flexGrow: 1,
   	paddingLeft: 22,
+  },
+  submenuscroll: {
+  	flex: -1,
+    justifyContent: 'space-between',
+    minHeight: Dimensions.get('window').height,
   }
 });
 
