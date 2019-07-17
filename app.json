@@ -1,8 +1,22 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
-  },
-  "androidStatusBar": {
-  	"backgroundColor": "#f66a5c"
+    "sdkVersion": "25.0.0",
+    "name": "Artssspot",
+    "description": "Artssspot let's you discover the local art scene all in one spot. Available for Barcelona, more cities coming soon.",
+    "slug": "artssspot",
+    "privacy": "public",
+    "version": "1.0",
+    "orientation": "portrait",
+    "primaryColor": "#f30a02",
+    "icon": "./assets/img/logo.png",
+	"androidStatusBar": {
+		"backgroundColor": "#f66a5c"
+	},
+	"ios": {
+      "bundleIdentifier": "com.artssspot.app"
+    },
+    "android": {
+      "package": "com.artssspot.app"
+    }
   }
 }
